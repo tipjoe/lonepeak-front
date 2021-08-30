@@ -3,7 +3,12 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+
+  // Custom
+  apiUrl: 'gackback.test/api',
+  appName: 'Lone Peak Park Neighbors',
+  appShortName: 'LPPN',
 };
 
 /*
