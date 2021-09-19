@@ -1,3 +1,19 @@
-<app-top-nav></app-top-nav>
 
-<router-outlet></router-outlet>
+<app-nav></app-nav>
+
+<div *ngIf="isAlertVisible" class="w-full p-4 bg-yellow-200 text-center relative">
+  I'm an alert
+  <mat-icon class="absolute right-1 top-1 cursor-pointer"
+    (click)="isAlertVisible=false">
+    close
+  </mat-icon>
+</div>
+
+<div class="mx-auto
+            sm:w-10/12 lg:w-8/12 xl:w-6/12
+            px-6 sm:px-0 pb-16
+            my-6 sm:my-8">
+
+  <router-outlet></router-outlet>
+</div>
+

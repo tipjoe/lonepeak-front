@@ -5,12 +5,12 @@ import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 
 @Component({
-  selector: 'app-top-nav',
-  templateUrl: './top-nav.component.html',
-  styleUrls: ['./top-nav.component.sass']
+  selector: 'app-nav',
+  templateUrl: './nav.component.html',
+  styleUrls: ['./nav.component.sass']
 })
 
-export class TopNavComponent implements OnInit {
+export class NavComponent implements OnInit {
 
   public isPhone: boolean = true;
   public showFiller: boolean = true;
@@ -28,7 +28,10 @@ export class TopNavComponent implements OnInit {
           this.isPhone = true;
         }
       });
+  }
 
+  testConsole(val: any) {
+    console.log(val);
   }
 
   ngOnInit(): void {

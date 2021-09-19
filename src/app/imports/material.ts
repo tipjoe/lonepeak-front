@@ -6,6 +6,7 @@
 
 //Angular Material Components
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule } from '@angular/material/card';
@@ -39,12 +40,16 @@ import { NgModule } from '@angular/core';
 
 @NgModule({
   exports: [
+    MatBadgeModule,
     MatButtonModule,
     MatCardModule,
+    MatGridListModule,
     MatIconModule,
+    MatListModule,
     MatSidenavModule,
     MatSliderModule,
     MatToolbarModule,
+    MatTooltipModule
   ]
 })
 export class MaterialImportModule {}

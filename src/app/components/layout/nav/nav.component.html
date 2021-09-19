@@ -1,0 +1,152 @@
+<div>
+
+  <mat-toolbar>
+    <mat-toolbar-row id="topnav" class="bg-gray-100">
+      <img id='logo' src='assets/images/lppn-logo-sm.png'
+          [routerLink]="['/home']" class="cursor-pointer">
+      <span *ngIf='!isPhone' class='title'>Lone Peak Park Neighbors</span>
+      <span class='spacer'></span>
+
+      <button mat-icon-button class="admin" (click)="testConsole('clicked admin')"
+        aria-label="Admin button"
+        id="btn-volunteer-dashboard"
+        matTooltip="Volunteer Dashboard">
+        <span class="material-icons text-3xl">
+          admin_panel_settings
+        </span>
+      </button>
+
+      <button mat-icon-button class="tasks"
+        [routerLink]="['/tasks']" routerLinkActive="mat-primary"
+        (click)="testConsole('clicked tasks')"
+        aria-label="Tasks button"
+        matTooltip="Tasks">
+        <span class="material-icons-outlined"
+          matBadge="1" matBadgeColor="warn" matBadgeSize="small"
+          aria-label="Tasks icon">
+          task
+        </span>
+      </button>
+
+      <button mat-icon-button class="notifications" (click)="testConsole('clicked notifications')"
+        aria-label="Notifications button"
+        matTooltip="Notifications">
+        <mat-icon aria-hidden="false"
+          aria-label="Notifications icon"
+          matBadge="9" matBadgeColor="warn" matBadgeSize="small">
+          notifications_none
+        </mat-icon>
+      </button>
+
+      <button mat-icon-button class="chat" (click)="testConsole('clicked chat')"
+        aria-label="Conversations button"
+        matTooltip="Conversations">
+        <mat-icon aria-hidden="false"
+          aria-label="Chat icon"
+          matBadge="2" matBadgeColor="warn" matBadgeSize="small">
+          chat_bubble_outline</mat-icon>
+      </button>
+
+    </mat-toolbar-row>
+
+    <!-- Breadcrumbs -->
+    <!-- <mat-toolbar-row id="breadcrumb" class="bg-gray-200 text-sm font-light h-auto">
+      Breadcrumbs
+    </mat-toolbar-row> -->
+  </mat-toolbar>
+
+  <!-- <mat-sidenav-container id="right-drawer" class="with-breadcrumb" autosize>
+
+    <mat-sidenav #right_sidenav class="p-4 md:p-8 w-1/2 md:w-1/4"
+      mode="over"
+      position="end"
+      [fixedTopGap]="56"
+    >
+
+      <div class="text-right">
+        <button mat-icon-button class="close-right-drawer" (click)="right_sidenav.toggle()" aria-label="Close nav">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+
+      <p>Auto-resizing sidenav</p>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="p-4 sm:p-8 mx-auto max-w-screen-lg">
+
+      <mat-card class="mb-3">
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+      </mat-card>
+
+      <mat-card class="mb-3">
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Ipsum has been the industry's standard dummy text.
+      </mat-card>
+    </mat-sidenav-content>
+
+  </mat-sidenav-container> -->
+
+  <mat-toolbar id="bottomnav" class="bg-gray-100">
+    <div class="flex w-full sm-w-9/12 lg:w-6/12 xl:w-4/12 mx-auto justify-between sm:justify-around">
+
+
+      <button mat-icon-button class="news"
+          [routerLink]="['/home']" routerLinkActive="mat-primary"
+          (click)="testConsole('clicked home')"
+          aria-label="News feed button"
+          matTooltip="News Feed">
+          <mat-icon aria-hidden="false">
+            home
+          </mat-icon>
+        </button>
+
+        <button mat-icon-button class="events"
+          [routerLink]="['/events']" routerLinkActive="mat-primary"
+          (click)="testConsole('clicked events')"
+          aria-label="Events button"
+          matTooltip="Events">
+          <mat-icon aria-hidden="false" aria-label="Events icon">
+            event
+          </mat-icon>
+        </button>
+
+        <div id="give-a-crap" class="relative w-14">
+          <button mat-fab class="map" (click)="testConsole('clicked map')"
+            [routerLink]="['/map']" routerLinkActive="mat-primary"
+            aria-label="Map button"
+            matTooltip="Give-a-Crap Map">
+            <span class="map-poop-icon text-white">💩</span>
+          </button>
+        </div>
+
+        <button mat-icon-button class="groups"
+          [routerLink]="['/groups']" routerLinkActive="mat-primary"
+          (click)="testConsole('clicked groups')"
+          aria-label="Groups button"
+          matTooltip="Groups">
+          <mat-icon aria-hidden="false" aria-label="Groups icon">
+            groups
+          </mat-icon>
+        </button>
+
+        <!-- <button mat-icon-button  class="me"
+          [routerLink]="['/me']" routerLinkActive="mat-primary"
+          (click)="testConsole('clicked me');"
+          aria-label="Me button"
+          matTooltip="Me">
+          <mat-icon aria-hidden="false" aria-label="Profile icon">
+            person
+          </mat-icon>
+        </button> -->
+
+        <button mat-icon-button  class="more"
+          [routerLink]="['/me']" routerLinkActive="mat-primary"
+          (click)="testConsole('clicked me');"
+          aria-label="More button"
+          matTooltip="More">
+          <mat-icon aria-hidden="false" aria-label="Profile icon">
+            more_vert
+          </mat-icon>
+        </button>
+    </div>
+  </mat-toolbar>
+</div>

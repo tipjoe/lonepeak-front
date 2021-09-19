@@ -9,9 +9,13 @@ import { Title } from '@angular/platform-browser';
 })
 export class AppComponent {
 
+  isAlertVisible: boolean = false;
+
   constructor(private titleService:Title) {
     // Set the browser tab title.
     this.titleService.setTitle(environment.appName);
+
+    // this.isAlertVisible = true;
   }
 
 }
