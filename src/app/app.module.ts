@@ -5,6 +5,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { MaterialImportModule } from './imports/material';
 import { ServiceWorkerModule } from '@angular/service-worker';
+
+// Third-party
+import { NgxImageCompressService } from 'ngx-image-compress';
 // import { QuillModule } from 'ngx-quill';
 
 // Shared App
@@ -109,6 +112,7 @@ import { AutofocusDirective } from './directives/autofocus/autofocus.directive';
   ],
   // Services are provided
   providers: [
+    NgxImageCompressService
 
   ],
   bootstrap: [AppComponent]

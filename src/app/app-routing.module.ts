@@ -26,7 +26,7 @@ import { EmailFormComponent } from './components/forms/email-form/email-form.com
 import { EventFormComponent } from './components/forms/event-form/event-form.component';
 import { GroupFormComponent } from './components/forms/group-form/group-form.component';
 import { MeFormComponent } from './components/forms/me-form/me-form.component';
-import { PostFormComponent } from './components/forms/post-form/post-form.component';
+// import { PostFormComponent } from './components/forms/post-form/post-form.component';
 import { TaskFormComponent } from './components/forms/task-form/task-form.component';
 import { TextFormComponent } from './components/forms/text-form/text-form.component';
 
@@ -44,7 +44,7 @@ const routes: Routes = [
   { path: 'messages', component: MessagesComponent },
   { path: 'notifications', component: NotificationsComponent },
   { path: 'post', component: PostComponent },
-  { path: 'add-post', component: PostFormComponent },
+  // { path: 'add-post', component: PostFormComponent },
   { path: 'task', component: TaskComponent },
   { path: 'tasks', component: TasksComponent },
 

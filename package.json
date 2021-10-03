@@ -24,6 +24,7 @@
     "@angular/service-worker": "~12.2.0",
     "@ctrl/ngx-emoji-mart": "^6.0.1",
     "moment": "^2.29.1",
+    "ngx-image-compress": "^11.0.3",
     "ngx-quill": "^14.3.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
