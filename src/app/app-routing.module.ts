@@ -9,7 +9,7 @@ import { EventsComponent } from './components/pages/events/events.component';
 import { GroupComponent } from './components/pages/group/group.component';
 import { GroupsComponent } from './components/pages/groups/groups.component';
 import { HomeComponent } from './components/pages/home/home.component';
-import { MeComponent } from './components/pages/me/me.component';
+import { UserComponent } from './components/pages/user/user.component';
 import { MessageComponent } from './components/pages/message/message.component';
 import { MessagesComponent } from './components/pages/messages/messages.component';
 import { NotificationsComponent } from './components/pages/notifications/notifications.component';
@@ -18,7 +18,6 @@ import { TaskComponent } from './components/pages/task/task.component';
 import { TasksComponent } from './components/pages/tasks/tasks.component';
 
 // Admin
-import { MemberListComponent } from './components/admin/member-list/member-list.component';
 import { MessageCenterComponent } from './components/admin/message-center/message-center.component';
 
 // Forms
