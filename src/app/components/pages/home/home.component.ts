@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import * as moment from 'moment';
 
 export interface Tile {
   color: string;
@@ -13,9 +12,6 @@ export interface Tile {
   styleUrls: ['./home.component.sass']
 })
 export class HomeComponent implements OnInit {
-
-  myArray = Array.from(Array(10).keys());
-  postTiming: string = moment(1625796961 * 1000).fromNow();
 
   constructor() { }
 

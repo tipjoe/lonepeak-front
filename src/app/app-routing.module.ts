@@ -1,24 +1,52 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { MeComponent } from './components/pages/me/me.component';
-import { GroupComponent } from './components/pages/group/group.component';
+// Pages
+import { ChatsComponent } from './components/pages/chats/chats.component';
+import { DashComponent } from './components/pages/dash/dash.component';
 import { EventComponent } from './components/pages/event/event.component';
-import { TaskComponent } from './components/pages/task/task.component';
-import { MapComponent } from './components/pages/map/map.component';
+import { EventsComponent } from './components/pages/events/events.component';
+import { GroupComponent } from './components/pages/group/group.component';
+import { GroupsComponent } from './components/pages/groups/groups.component';
 import { HomeComponent } from './components/pages/home/home.component';
+import { MeComponent } from './components/pages/me/me.component';
+import { MessageComponent } from './components/pages/message/message.component';
+import { MessagesComponent } from './components/pages/messages/messages.component';
+import { NotificationsComponent } from './components/pages/notifications/notifications.component';
+import { PostComponent } from './components/pages/post/post.component';
+import { TaskComponent } from './components/pages/task/task.component';
+import { TasksComponent } from './components/pages/tasks/tasks.component';
+
+// Admin
+import { MemberListComponent } from './components/admin/member-list/member-list.component';
+import { MessageCenterComponent } from './components/admin/message-center/message-center.component';
+
+// Forms
+import { EmailFormComponent } from './components/forms/email-form/email-form.component';
+import { EventFormComponent } from './components/forms/event-form/event-form.component';
+import { GroupFormComponent } from './components/forms/group-form/group-form.component';
+import { MeFormComponent } from './components/forms/me-form/me-form.component';
+import { PostFormComponent } from './components/forms/post-form/post-form.component';
+import { TaskFormComponent } from './components/forms/task-form/task-form.component';
+import { TextFormComponent } from './components/forms/text-form/text-form.component';
+
 
 const routes: Routes = [
-  // Example:
-  // { path: 'first-component', component: FirstComponent },
-  // { path: 'second-component', component: SecondComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'crapdash', component: DashComponent },
+  { path: 'event', component: EventComponent },
+  { path: 'events', component: EventsComponent },
+  { path: 'group', component: GroupComponent },
+  { path: 'groups', component: GroupsComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'map', component: MapComponent },
-  { path: 'tasks', component: TaskComponent },
-  { path: 'events', component: EventComponent },
-  { path: 'groups', component: GroupComponent },
   { path: 'me', component: MeComponent },
+  { path: 'message', component: MessageComponent },
+  { path: 'messages', component: MessagesComponent },
+  { path: 'notifications', component: NotificationsComponent },
+  { path: 'post', component: PostComponent },
+  { path: 'add-post', component: PostFormComponent },
+  { path: 'task', component: TaskComponent },
+  { path: 'tasks', component: TasksComponent },
 
 ];
 

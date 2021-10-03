@@ -7,15 +7,6 @@
       <span *ngIf='!isPhone' class='title'>Lone Peak Park Neighbors</span>
       <span class='spacer'></span>
 
-      <button mat-icon-button class="admin" (click)="testConsole('clicked admin')"
-        aria-label="Admin button"
-        id="btn-volunteer-dashboard"
-        matTooltip="Volunteer Dashboard">
-        <span class="material-icons text-3xl">
-          admin_panel_settings
-        </span>
-      </button>
-
       <button mat-icon-button class="tasks"
         [routerLink]="['/tasks']" routerLinkActive="mat-primary"
         (click)="testConsole('clicked tasks')"
@@ -92,8 +83,8 @@
       <button mat-icon-button class="news"
           [routerLink]="['/home']" routerLinkActive="mat-primary"
           (click)="testConsole('clicked home')"
-          aria-label="News feed button"
-          matTooltip="News Feed">
+          aria-label="Neighbor news button"
+          matTooltip="Neighbor News">
           <mat-icon aria-hidden="false">
             home
           </mat-icon>
@@ -109,11 +100,11 @@
           </mat-icon>
         </button>
 
-        <div id="give-a-crap" class="relative w-14">
-          <button mat-fab class="map" (click)="testConsole('clicked map')"
-            [routerLink]="['/map']" routerLinkActive="mat-primary"
-            aria-label="Map button"
-            matTooltip="Give-a-Crap Map">
+        <div id="crap-dash" class="relative w-14">
+          <button mat-fab class="map" (click)="testConsole('clicked dash')"
+            [routerLink]="['/dash']" routerLinkActive="mat-primary"
+            aria-label="Crap Dash button"
+            matTooltip="Crap Dash">
             <span class="map-poop-icon text-white">💩</span>
           </button>
         </div>
@@ -128,25 +119,34 @@
           </mat-icon>
         </button>
 
-        <!-- <button mat-icon-button  class="me"
-          [routerLink]="['/me']" routerLinkActive="mat-primary"
-          (click)="testConsole('clicked me');"
-          aria-label="Me button"
-          matTooltip="Me">
-          <mat-icon aria-hidden="false" aria-label="Profile icon">
-            person
-          </mat-icon>
-        </button> -->
+        <mat-menu #bottomMenu="matMenu">
+          <button mat-menu-item class="me"
+            [routerLink]="['/me']" routerLinkActive="mat-primary"
+            (click)="testConsole('clicked me');"
+            aria-label="Me button">
+            <mat-icon aria-hidden="false" aria-label="Profile icon">
+              person
+            </mat-icon> Me
+          </button>
+          <button mat-menu-item class="me"
+            [routerLink]="['/tasks']" routerLinkActive="mat-primary"
+            (click)="testConsole('clicked tasks')"
+            aria-label="Tasks button">
+            <mat-icon aria-hidden="false" aria-label="Task icon">
+             task
+            </mat-icon> To-do's
+          </button>
+        </mat-menu>
 
         <button mat-icon-button  class="more"
-          [routerLink]="['/me']" routerLinkActive="mat-primary"
-          (click)="testConsole('clicked me');"
+          [matMenuTriggerFor]="bottomMenu"
           aria-label="More button"
           matTooltip="More">
-          <mat-icon aria-hidden="false" aria-label="Profile icon">
+          <mat-icon aria-hidden="false" aria-label="More menu">
             more_vert
           </mat-icon>
         </button>
+
     </div>
   </mat-toolbar>
 </div>
