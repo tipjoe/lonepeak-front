@@ -7,7 +7,7 @@
       <span *ngIf='!isPhone' class='title'>Lone Peak Park Neighbors</span>
       <span class='spacer'></span>
 
-      <button mat-icon-button class="tasks"
+      <!-- <button mat-icon-button class="tasks"
         [routerLink]="['/tasks']" routerLinkActive="mat-primary"
         (click)="testConsole('clicked tasks')"
         aria-label="Tasks button"
@@ -17,6 +17,15 @@
           aria-label="Tasks icon">
           task
         </span>
+      </button> -->
+
+      <button mat-icon-button class="chat" (click)="testConsole('clicked chat')"
+        aria-label="Conversations button"
+        matTooltip="Conversations">
+        <mat-icon aria-hidden="false"
+          aria-label="Chat icon"
+          matBadge="2" matBadgeColor="warn" matBadgeSize="small">
+          chat_bubble_outline</mat-icon>
       </button>
 
       <button mat-icon-button class="notifications" (click)="testConsole('clicked notifications')"
@@ -29,14 +38,6 @@
         </mat-icon>
       </button>
 
-      <button mat-icon-button class="chat" (click)="testConsole('clicked chat')"
-        aria-label="Conversations button"
-        matTooltip="Conversations">
-        <mat-icon aria-hidden="false"
-          aria-label="Chat icon"
-          matBadge="2" matBadgeColor="warn" matBadgeSize="small">
-          chat_bubble_outline</mat-icon>
-      </button>
 
     </mat-toolbar-row>
 

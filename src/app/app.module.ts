@@ -1,12 +1,12 @@
-// System
+// System and Third-party
 import { NgModule } from '@angular/core';
+import { NgxsModule } from '@ngxs/store';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { environment } from '../environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { MaterialImportModule } from './imports/material';
 import { ServiceWorkerModule } from '@angular/service-worker';
-
-// Third-party
 import { NgxImageCompressService } from 'ngx-image-compress';
 // import { QuillModule } from 'ngx-quill';
 
@@ -54,6 +54,17 @@ import { PostsComponent } from './components/widgets/posts/posts.component';
 // Directives
 import { AutofocusDirective } from './directives/autofocus/autofocus.directive';
 
+// Ngxs states
+import { ChatState } from './store/chat/chat.state';
+import { EventState } from './store/event/event.state';
+import { GacState } from './store/gac/gac.state';
+import { GroupState } from './store/group/group.state';
+import { MapState } from './store/map/map.state';
+import { MessageState } from './store/message/message.state';
+import { NotificationState } from './store/notification/notification.state';
+import { PostState } from './store/post/post.state';
+import { UserState } from './store/user/user.state';
+
 
 @NgModule({
   // Components are declared
@@ -98,6 +109,22 @@ import { AutofocusDirective } from './directives/autofocus/autofocus.directive';
 
     // Material Design Components
     MaterialImportModule,
+
+    // Store
+    NgxsModule.forRoot([
+      ChatState,
+      EventState,
+      GacState,
+      GroupState,
+      MapState,
+      MessageState,
+      NotificationState,
+      PostState,
+      UserState,
+    ], {
+        developmentMode: !environment.production
+    }),
+    NgxsReduxDevtoolsPluginModule.forRoot(),
 
     // Quill wysywig -- Note: weird errors so don't use for now.
     // QuillModule.forRoot(),

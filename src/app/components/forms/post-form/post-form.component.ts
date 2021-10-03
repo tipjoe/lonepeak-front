@@ -42,8 +42,10 @@ export class PostFormComponent implements OnInit {
   }
 
   textAreaHeight(event: KeyboardEvent) {
+    // Must cast event.target to prevent null possibility.
     let el: HTMLInputElement = (<HTMLInputElement>event.target);
     el.style.height = "1px";
     el.style.height = (25 + el.scrollHeight)+"px";
   }
+
 }
