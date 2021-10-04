@@ -30,7 +30,7 @@ import { NotificationsComponent } from './components/pages/notifications/notific
 import { PostComponent } from './components/pages/post/post.component';
 import { TaskComponent } from './components/pages/task/task.component';
 import { TasksComponent } from './components/pages/tasks/tasks.component';
-import { UserComponent } from './components/user/user.component';
+import { UserComponent } from './components/pages/user/user.component';
 
 // Admin
 import { MessageCenterComponent } from './components/admin/message-center/message-center.component';

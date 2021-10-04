@@ -8,7 +8,7 @@
     <div class="relative w-12 h-12 mr-4 cursor-pointer"
       [routerLink]="['/me']">
       <img class="rounded-full border border-gray-100 shadow-sm" src="https://randomuser.me/api/portraits/women/81.jpg" alt="user image" />
-      <div class="absolute -top-1 -right-1 h-4 w-4 my-1 border-2 border-white rounded-full bg-green-400 z-2"></div>
+      <!-- <div class="absolute -top-1 -right-1 h-4 w-4 my-1 border-2 border-white rounded-full bg-green-400 z-2"></div> -->
     </div>
     <div class="flex-grow text-gray-400 cursor-pointer"
       (click)="toggleForm()">
@@ -27,11 +27,11 @@
       <textarea matInput autofocus (keyup)="textAreaHeight($event)"></textarea>
     </mat-form-field>
     <div class="flex justify-end mt-1">
-      <button mat-stroked-button class="mr-1"
+      <button mat-stroked-button class="mr-2"
         (click)="toggleForm()">
         Cancel</button>
       <button mat-stroked-button aria-label="Add image"
-        class="mr-1"
+        class="mr-2"
         (click)="compressImage()">
           <mat-icon color="primary">image</mat-icon> Photo
       </button>

@@ -9,13 +9,13 @@ import { EventsComponent } from './components/pages/events/events.component';
 import { GroupComponent } from './components/pages/group/group.component';
 import { GroupsComponent } from './components/pages/groups/groups.component';
 import { HomeComponent } from './components/pages/home/home.component';
-import { UserComponent } from './components/pages/user/user.component';
 import { MessageComponent } from './components/pages/message/message.component';
 import { MessagesComponent } from './components/pages/messages/messages.component';
 import { NotificationsComponent } from './components/pages/notifications/notifications.component';
 import { PostComponent } from './components/pages/post/post.component';
 import { TaskComponent } from './components/pages/task/task.component';
 import { TasksComponent } from './components/pages/tasks/tasks.component';
+import { UserComponent } from './components/pages/user/user.component';
 
 // Admin
 import { MessageCenterComponent } from './components/admin/message-center/message-center.component';
@@ -38,7 +38,6 @@ const routes: Routes = [
   { path: 'group', component: GroupComponent },
   { path: 'groups', component: GroupsComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'me', component: MeComponent },
   { path: 'message', component: MessageComponent },
   { path: 'messages', component: MessagesComponent },
   { path: 'notifications', component: NotificationsComponent },
@@ -46,6 +45,7 @@ const routes: Routes = [
   // { path: 'add-post', component: PostFormComponent },
   { path: 'task', component: TaskComponent },
   { path: 'tasks', component: TasksComponent },
+  { path: 'user', component: UserComponent },
 
 ];
 
