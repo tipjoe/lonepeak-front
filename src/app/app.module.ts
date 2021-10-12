@@ -5,7 +5,10 @@ import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { environment } from '../environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+
 import { MaterialImportModule } from './imports/material';
+
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { NgxImageCompressService } from 'ngx-image-compress';
 // import { QuillModule } from 'ngx-quill';
@@ -58,11 +61,15 @@ import { ChatState } from './store/chat/chat.state';
 import { EventState } from './store/event/event.state';
 import { GacState } from './store/gac/gac.state';
 import { GroupState } from './store/group/group.state';
+import { LocationState } from './store/location/location.state';
 import { MapState } from './store/map/map.state';
 import { MessageState } from './store/message/message.state';
 import { NotificationState } from './store/notification/notification.state';
 import { PostState } from './store/post/post.state';
 import { UserState } from './store/user/user.state';
+
+// Services
+import { MapService } from './services/map/map.service';
 
 
 @NgModule({
@@ -104,6 +111,7 @@ import { UserState } from './store/user/user.state';
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
+    HttpClientModule,
 
     // Material Design Components
     MaterialImportModule,
@@ -114,6 +122,7 @@ import { UserState } from './store/user/user.state';
       EventState,
       GacState,
       GroupState,
+      LocationState,
       MapState,
       MessageState,
       NotificationState,
@@ -137,7 +146,8 @@ import { UserState } from './store/user/user.state';
   ],
   // Services are provided
   providers: [
-    NgxImageCompressService
+    MapService,
+    NgxImageCompressService,
 
   ],
   bootstrap: [AppComponent]

@@ -17,6 +17,9 @@ import { TaskComponent } from './components/pages/task/task.component';
 import { TasksComponent } from './components/pages/tasks/tasks.component';
 import { UserComponent } from './components/pages/user/user.component';
 
+// For testing only -- remove when done.
+import { MapComponent } from './components/widgets/map/map.component';
+
 // Admin
 import { MessageCenterComponent } from './components/admin/message-center/message-center.component';
 
@@ -38,6 +41,7 @@ const routes: Routes = [
   { path: 'group', component: GroupComponent },
   { path: 'groups', component: GroupsComponent },
   { path: 'home', component: HomeComponent },
+  { path: 'map', component: MapComponent },
   { path: 'message', component: MessageComponent },
   { path: 'messages', component: MessagesComponent },
   { path: 'notifications', component: NotificationsComponent },
