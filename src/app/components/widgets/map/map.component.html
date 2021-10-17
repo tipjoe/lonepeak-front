@@ -1,1 +1,5 @@
-<div id="map"></div>
+<div id="map">The Map</div>
+
+<li *ngFor="let location of locations$ | async">
+  <span (click)="setCurrentLocation(location.id)">Select location {{ location.id }}</span>
+</li>

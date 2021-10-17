@@ -1,35 +1,24 @@
 import { MapService } from './../../services/map/map.service';
 import { Injectable } from "@angular/core";
-import { Store, State, Select, Selector, Action, StateContext } from "@ngxs/store";
+import { State, Action, StateContext, createSelector, Selector } from "@ngxs/store";
 import { Location } from "src/app/interfaces/map/location";
-import { GetLocations, GetRoads } from "./location.actions";
+import { AddLocation, GetLocations, GetRoads, RemoveLocation,
+         SetCurrentLocation
+       } from "./location.actions";
 import { tap } from "rxjs/operators";
 
-// import needed models.
-// import actions.
-// import services.
-// import other states.
 
 export interface LocationStateModel {
-  locations: Location[];
-};
+  current: Location | null;
+  entities: Location[];
+}
 
-// You may need multiple payload interfaces as used in your actions.
-// export interface LocationPayload {}
-// See if you need to define it.
-
-
-// This defines a segment of the global state with <___StateModel>.
-// `name` is the key used to access this state.
-// `default` initializes this state's values.
 @State<LocationStateModel>({
-  name: 'locations',
-  // This default should match the shape of the state model above.
-  // Define both index/list and current/individual elements.
+  name: 'location',
   defaults: {
-    locations: []
-  },
-
+    current: null,
+    entities: [],
+  }
 })
 
 @Injectable()
@@ -37,19 +26,96 @@ export class LocationState {
 
   // Inject private services needed by this state.
   constructor(
-    // private store: Store,
     private mapService: MapService,
   ) {}
 
-  // Define @Select, @Action, private methods, etc.
 
+  /*** SELECTORS ***/
+
+  @Selector([LocationState])
+  static locations(state: LocationStateModel) {
+    return state.entities;
+  }
+
+  @Selector([LocationState])
+  static current(state: LocationStateModel) {
+    return state.current;
+  }
+
+  /*** DYNAMIC SELECTORS ***/
+
+  static locationById(id: number) {
+    return createSelector([LocationState], (state: LocationStateModel) => {
+      return state.entities.find(e => e.id === id);
+    });
+  }
+
+
+  /*** ACTIONS ***/
+
+  // Add a location to entities list.
+  @Action(AddLocation)
+  addLocation({ getState, patchState }: StateContext<LocationStateModel>, payload: AddLocation) {
+    const state = getState();
+
+    // Do nothing if ID already exists.
+    const location = state.entities.find(e => e.id === payload.location.id);
+    if (location) return;
+
+    patchState({
+      entities: [
+        ...state.entities,
+        payload.location
+      ]
+    });
+  }
+
+  // Get all locations for user's top-level neighborhood group.
   @Action(GetLocations)
   getLocations(ctx: StateContext<LocationStateModel>) {
     const state = ctx.getState();
+
+    // If they've already been loaded from api, use local cached values.
+    // They will be available in the locations$ property.
+    if (state.entities.length > 1) return;
+
     return this.mapService.getLocations().pipe(
       tap(locations => {
-        ctx.patchState({ locations });
+        ctx.setState({
+          entities: locations,
+          current: null
+        });
       })
     );
   }
+
+  // Remove a location from entities list.
+  @Action(RemoveLocation)
+  removeLocation({ getState, patchState }: StateContext<LocationStateModel>, payload: RemoveLocation) {
+    const state = getState();
+
+    // Get list of all but removed location.
+    const locations = state.entities.filter(e => e.id !== payload.id);
+
+    patchState({
+      entities: locations
+    });
+
+    // If current location has been deleted, set it to null.
+    if (state.current?.id === payload.id) {
+      patchState({
+        current: null
+      });
+    }
+  }
+
+  // Set current location by ID.
+  @Action(SetCurrentLocation)
+  setCurrentLocation(ctx: StateContext<LocationStateModel>, payload: SetCurrentLocation) {
+    const location = ctx.getState().entities.find(l => l.id == payload.id);
+    ctx.patchState({
+      current: location
+    });
+  }
+
 }

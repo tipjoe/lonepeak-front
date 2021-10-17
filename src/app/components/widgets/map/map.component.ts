@@ -1,9 +1,12 @@
+import { Observable } from 'rxjs';
+import { LocationState } from './../../../store/location/location.state';
+import { Select } from '@ngxs/store';
 import { Store } from '@ngxs/store';
-import { MapService } from './../../../services/map/map.service';
 import { Road } from './../../../interfaces/map/road';
 import { Location } from './../../../interfaces/map/location';
-import { Component, Input, OnInit } from '@angular/core';
-import { GetLocations } from 'src/app/store/location/location.actions';
+import { Component, OnInit } from '@angular/core';
+import { AddLocation, GetLocations, RemoveLocation, SetCurrentLocation }
+  from 'src/app/store/location/location.actions';
 
 @Component({
   selector: 'app-map',
@@ -11,8 +14,6 @@ import { GetLocations } from 'src/app/store/location/location.actions';
   styleUrls: ['./map.component.sass']
 })
 export class MapComponent implements OnInit {
-
-  // @Select
 
   // Commented properties from legacy. Delete if not used.
   // private gacs: array = [];
@@ -29,17 +30,26 @@ export class MapComponent implements OnInit {
 
   // Location info
   // include in locations: notes, user, friend/know, membership, gacs, myGacs
-  private locations: Location[] = [];
+
+  // All locations (entities) in neighborhood's top-level group.
+  @Select(LocationState.locations) locations$: Observable<Location[]>;
+
+  // Locations for the currently selected group.
+  // TODO see location state comment.
+  // @Select(LocationState.groupLocations) groupLocations$: Observable<Location[]>;
+
+  // Selected location.
+  @Select(LocationState.current) current$: Observable<Location>;
+
+
   // private lastLocation: Location;
   // private myLocation: Location;
   private roads: Road[] = [];
-  // private selectedLocation: Location;
 
   // Users
   // private members: User[] = [];
 
   constructor(
-    private mapService: MapService,
     private store: Store
   ) { }
 
@@ -47,14 +57,26 @@ export class MapComponent implements OnInit {
     // Load current map
 
     // Locations (parcel or unit)
-    // this.mapService.getLocations();
-    this.store.dispatch(new GetLocations())
+    this.store.dispatch(new GetLocations());
     // Roads
+    // this.store.dispatch(new GetRoads());
 
     // Members (with parcel locations)
 
     // Notes
 
+  }
+
+  setCurrentLocation(id: number) {
+    this.store.dispatch(new SetCurrentLocation(id));
+    // console.log('current', this.store.selectSnapshot(LocationState.current));
+    // console.log('next', this.store.selectSnapshot(LocationState.locationById(id + 1)));
+    let l = <Location> {...this.store.selectSnapshot(LocationState.current)};
+    l.id = 99999;
+    l.address1 = 'JOE TEST';
+
+    this.store.dispatch(new AddLocation(l));
+    // this.store.dispatch(new RemoveLocation(id));
   }
 
 }

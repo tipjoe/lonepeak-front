@@ -129,7 +129,11 @@ import { MapService } from './services/map/map.service';
       PostState,
       UserState,
     ], {
-        developmentMode: !environment.production
+        developmentMode: !environment.production,
+        selectorOptions: {
+          suppressErrors: true,
+          injectContainerState: false
+        }
     }),
     NgxsReduxDevtoolsPluginModule.forRoot(),
 
