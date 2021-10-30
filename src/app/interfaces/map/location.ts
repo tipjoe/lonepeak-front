@@ -15,5 +15,7 @@ export interface Location {
   parcel: string;
   state: string;
   updated_at: string;
-  zip: string
+  zip: string;
+  properties: any;
+  fill?: string;
 }

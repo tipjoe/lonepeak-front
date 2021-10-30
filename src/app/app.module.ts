@@ -56,24 +56,32 @@ import { PostsComponent } from './components/widgets/posts/posts.component';
 // Directives
 import { AutofocusDirective } from './directives/autofocus/autofocus.directive';
 
-// Ngxs states
+// Ngxs states -- most entities should extend EntityState.
+// Don't import (EntityState) here. Use it like an abstract class and only
+// import those that extend it.
+// import { EntityState } from './store/entity/entity.state';
+
 import { ChatState } from './store/chat/chat.state';
 import { EventState } from './store/event/event.state';
 import { GacState } from './store/gac/gac.state';
 import { GroupState } from './store/group/group.state';
-import { LocationState } from './store/location/location.state';
-import { MapState } from './store/map/map.state';
+import { LocationState } from './store/map/location/location.state';
 import { MessageState } from './store/message/message.state';
 import { NotificationState } from './store/notification/notification.state';
 import { PostState } from './store/post/post.state';
+import { RoadState } from './store/map/road/road.state';
 import { UserState } from './store/user/user.state';
 
-// Services
-import { MapService } from './services/map/map.service';
+// Internal Services
+// App-based services are made available globally with the
+// @Injectable({providedIn: root}) decorator. See `providers` below for more.
 
-
+// @NgModule is a decorator function that takes an object with defined
+// properties (like `declarations`, `imports`, etc.) that describe how
+// to configure and instantiate the module when it `bootstraps`.
+// See https://angular.io/guide/architecture-modules
 @NgModule({
-  // Components are declared
+  // Components (a type of directive), Directives, and Pipes are declared
   declarations: [
     AddPhotoFormComponent,
     AppComponent,
@@ -106,24 +114,33 @@ import { MapService } from './services/map/map.service';
     TextFormComponent,
     UserComponent,
   ],
+
   // Modules are imported
   imports: [
     AppRoutingModule,
     BrowserAnimationsModule,
+    // Set's up common global providers for any browser-based app.
+    // BrowserModule should only be registered here in app.module. Other
+    // modules can import CommonModule, a subset of this.
     BrowserModule,
     HttpClientModule,
 
     // Material Design Components
     MaterialImportModule,
 
-    // Store
+    // Ngxs Store
+    // `forRoot
+    // See https://angular.io/guide/singleton-services#the-forroot-pattern
+    //
+    // forRoot contains configurations for a module and globally instantiates
+    // the module as a singleton (only one instance in the application).
     NgxsModule.forRoot([
       ChatState,
       EventState,
       GacState,
       GroupState,
       LocationState,
-      MapState,
+      RoadState,
       MessageState,
       NotificationState,
       PostState,
@@ -132,6 +149,9 @@ import { MapService } from './services/map/map.service';
         developmentMode: !environment.production,
         selectorOptions: {
           suppressErrors: true,
+          // `false` will be the default for `injectContainerState` in v4.
+          // `true` is the current default, but deprecated.
+          // See https://www.ngxs.io/advanced/optimizing-selectors
           injectContainerState: false
         }
     }),
@@ -148,12 +168,47 @@ import { MapService } from './services/map/map.service';
     })
 
   ],
-  // Services are provided
+
+  // Generically, any functionality you 'provide' to your app via DI can be
+  // thought of as a service. You know you're using a service when you don't
+  // have to think about creating it manually (e.g. `new MyService()`).
+  // Creating things within a class/method is bad practice and makes testing
+  // more difficult.
+  //
+  // Anything that can be 'provided' via the dependency injector, making it
+  // 'injectable' in the constructors of any class that needs it.
+  // `@Injectable({providedIn: 'root'})` is preferred to registering services
+  // globally. Or you can specify a service in a module or component
+  // provider array if only used there.
+  //
+  // DI refers to Dependency Injection. The DI 'container' is two things:
+  // 1) The registered list of providers that the 'injector' knows how to
+  // instantiate and provide to the app, and 2) the actual pool of services
+  // already instantiated. When the injector tries to provide a service that
+  // hasn't been created/instantiated, it creates it once (singleton) so
+  // subsequent uses are faster.
+  //
+  // Some provided services are concrete and used directly. Others refer to a
+  // contract (interface or other abstraction) that needs to know how/what to
+  // instantiate for a particular context (e.g. a file service to local disk
+  // or cloud storage).
+  //
+  // See more about DI, Services, and providers:
+  // https://angular.io/guide/architecture-services
+  //
+  // See `The forRoot() pattern`:
+  // https://angular.io/guide/singleton-services#the-forroot-pattern
+
   providers: [
-    MapService,
+    // Only list externally provided services that don't implement @Injectable.
+    // Consider using these in feature modules for better isolation and
+    // lazy loading.
     NgxImageCompressService,
 
   ],
+
+  // This is the root component angular creates and inserts into index.html.
+  // bootstrap should only be defined in this root module.
   bootstrap: [AppComponent]
 })
 export class AppModule { }

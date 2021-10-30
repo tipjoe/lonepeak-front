@@ -29,6 +29,7 @@
     "ngx-image-compress": "^11.0.3",
     "ngx-quill": "^14.3.0",
     "rxjs": "~6.6.0",
+    "svg-pan-zoom": "^3.6.1",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },

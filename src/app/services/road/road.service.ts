@@ -1,14 +1,14 @@
+import { Road } from './../../interfaces/map/road';
 import { HttpClient } from '@angular/common/http';
-import { Location } from 'src/app/interfaces/map/location';
 import { AbstractEntityService } from 'src/app/services/abstract-entity/abstract-entity.service';
 import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LocationService extends AbstractEntityService<Location> {
+export class RoadService extends AbstractEntityService<Road> {
 
-  url = this.baseUrl + 'mapdata/locations';
+  url = this.baseUrl + 'mapdata/roads';
 
   constructor(
     private httpConcrete: HttpClient
