@@ -2,7 +2,7 @@ export const environment = {
   production: true,
 
   // Custom
-  apiUrl: 'gackback.test/api',
-  appName: 'Lone Peak Park Neighbors',
-  appShortName: 'LPPN',
+  apiUrl: 'api.lonepeak.app/',
+  appName: 'LPPN',
+  appLongName: 'Lone Peak Park Neighbors',
 };

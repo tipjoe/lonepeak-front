@@ -1,39 +1,48 @@
+import { User } from './../../interfaces/user';
+import { Observable } from 'rxjs';
+import { UserService } from '../../services/user/user.service';
+import { EntityState } from '../entity/entity.state';
 import { Injectable } from "@angular/core";
-import { Store, State, Select, Selector, Action, StateContext } from "@ngxs/store";
-// import needed models.
-// import actions.
-// import services.
-// import other states.
+import { State, Action, StateContext } from "@ngxs/store";
+import { EntityStateModel } from '../entity/entity.state';
 
-export class UserStateModel {
+import { UserActions as UA } from "./user.actions";
 
-}
+export interface UserStateModel extends EntityStateModel<User> {};
 
-// You may need multiple payload interfaces as used in your actions.
-export interface UserPayload {}
-
-
-@Injectable()
-
-// This defines a segment of the global state with <___StateModel>.
-// `name` is the key used to access this state.
-// `default` initializes this state's values.
 @State<UserStateModel>({
   name: 'user',
-  // This default should match the shape of the state model above.
-  // Define both index/list and current/individual elements.
-  defaults: {}
-
+  defaults: {
+    entities: [],
+    // Logged in user.
+    current: null,
+    expires: 0,
+  }
 })
 
-export class UserState {
+// This injectable decorator makes this available as a global service.
+@Injectable({ providedIn: 'root' })
+export class UserState extends EntityState<User>{
+
+  // Keep roads for 365 days. They will rarely change (if ever) and this will
+  // improve pwa app performance.
+  // D * H * M * S * 1000 (ms)
+  private expiresAt: number = Date.now() + (365 * 24 * 60 * 60 * 1000);
 
   // Inject private services needed by this state.
   constructor(
-    private store: Store,
-  ) {}
+    private concreteEntityService: UserService,
+  ) {
+    super(concreteEntityService);
+  }
 
-  // Define @Select, @Action, private methods, etc.
+  /*** SELECTORS ***/
 
+  /*** ACTIONS ***/
+  @Action(UA.GetIndex)
+  getIndex(ctx: StateContext<EntityStateModel<User>>, payload: UA.GetIndex): Observable<User[]> {
+    return super.getIndex(ctx, payload);
+  }
 
+  // Wrap other methods from EntityState if/when needed.
 }

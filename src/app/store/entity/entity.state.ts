@@ -11,7 +11,7 @@ export interface Id {
 // Extend this with a <T>ype in your concrete subclass.
 export class EntityStateModel<T> {
 	entities: T[] = [];
-  current: T | null;
+  current: T|null;
   expires: number = 0;
 }
 
@@ -123,8 +123,6 @@ export class EntityState<T extends Id> {
           entities,
           expires: Date.now() + this.expiresIn,
         });
-        // Need to getState again. It returns a snapshot at point in time.
-        // console.log('slice after patch', ctx.getState());
       })
     );
 	}

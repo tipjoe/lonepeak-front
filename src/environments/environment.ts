@@ -6,9 +6,12 @@ export const environment = {
   production: false,
 
   // Custom
-  apiUrl: 'https://lonepeak.test/',
-  appName: 'Lone Peak Park Neighbors',
-  appShortName: 'LPPN',
+  // Legacy back end.
+  // apiUrl: 'https://lonepeak.test/',
+  // New v2 back end.
+  apiUrl: 'https://gackback.test/',
+  appName: 'LPPN',
+  appLongName: 'Lone Peak Park Neighbors',
 };
 
 /*

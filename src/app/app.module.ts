@@ -5,13 +5,16 @@ import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { environment } from '../environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { MaterialImportModule } from './imports/material';
 
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { NgxImageCompressService } from 'ngx-image-compress';
 // import { QuillModule } from 'ngx-quill';
+
+// Interceptors
+import { WithCredentialsInterceptor } from './interceptors/with-credentials';
 
 // Shared App
 import { AppComponent } from './app.component';
@@ -65,11 +68,11 @@ import { ChatState } from './store/chat/chat.state';
 import { EventState } from './store/event/event.state';
 import { GacState } from './store/gac/gac.state';
 import { GroupState } from './store/group/group.state';
-import { LocationState } from './store/map/location/location.state';
+import { LocationState } from './store/location/location.state';
 import { MessageState } from './store/message/message.state';
 import { NotificationState } from './store/notification/notification.state';
 import { PostState } from './store/post/post.state';
-import { RoadState } from './store/map/road/road.state';
+import { RoadState } from './store/road/road.state';
 import { UserState } from './store/user/user.state';
 
 // Internal Services
@@ -204,6 +207,23 @@ import { UserState } from './store/user/user.state';
     // Consider using these in feature modules for better isolation and
     // lazy loading.
     NgxImageCompressService,
+
+    // HTTP_INTERCEPTORS are a unique case since there can be multiple values/
+    // interceptors with the same provider token (HTTP_INTERCEPTORS). In this
+    // case, the provider token is not a class, but an lookup key called an
+    // injector token.
+    //
+    // See top two answers (seangwright and Leon) here for good descriptions.
+    //   https://stackoverflow.com/questions/50211120/angular-6-provide-http-interceptors-for-root
+    // And official docs explanation here:
+    //   https://angular.io/guide/dependency-injection-in-action#external-module-configuration
+    // And blog post showing this setup here:
+    //   https://medium.com/codingthesmartway-com-blog/angular-4-3-httpclient-accessing-rest-web-services-with-angular-2305b8fd654b
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: WithCredentialsInterceptor,
+      multi: true
+    }
 
   ],
 

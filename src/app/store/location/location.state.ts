@@ -1,11 +1,11 @@
 import { Observable } from 'rxjs';
-import { LocationService } from './../../../services/location/location.service';
-import { EntityState } from './../../entity/entity.state';
+import { LocationService } from '../../services/location/location.service';
+import { EntityState } from '../entity/entity.state';
 import { Injectable } from "@angular/core";
 import { State, Action, StateContext } from "@ngxs/store";
 import { Location } from "src/app/interfaces/map/location";
 import { LocationActions as LA } from "./location.action";
-import { EntityStateModel } from '../../entity/entity.state';
+import { EntityStateModel } from '../entity/entity.state';
 
 export interface LocationStateModel extends EntityStateModel<Location> {};
 
@@ -39,7 +39,7 @@ export class LocationState extends EntityState<Location>{
   /*** ACTIONS ***/
   // For generic entity actions, just call the super method.
   @Action(LA.GetIndex)
-  getIndex(ctx: StateContext<LocationStateModel>, payload: LA.GetIndex) {
+  getIndex(ctx: StateContext<LocationStateModel>, payload: LA.GetIndex): Observable<Location[]> {
     return super.getIndex(ctx, payload);
   }
 

@@ -1,4 +1,4 @@
-import { Road } from './../../../interfaces/map/road';
+import { Road } from '../../interfaces/map/road';
 
 export namespace RoadActions {
 

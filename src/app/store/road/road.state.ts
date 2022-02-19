@@ -1,9 +1,9 @@
-import { Road } from './../../../interfaces/map/road';
+import { Road } from '../../interfaces/map/road';
 import { Injectable } from "@angular/core";
 import { State, Action, StateContext } from "@ngxs/store";
 import { Observable } from 'rxjs';
 import { RoadService } from 'src/app/services/road/road.service';
-import { EntityState, EntityStateModel } from '../../entity/entity.state';
+import { EntityState, EntityStateModel } from '../entity/entity.state';
 import { RoadActions as RA } from "./road.action";
 
 export interface RoadStateModel extends EntityStateModel<Road> {};

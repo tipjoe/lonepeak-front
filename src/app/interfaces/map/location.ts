@@ -8,14 +8,16 @@ export interface Location {
   address2: string;
   city: string;
   created_at: string;
+  days_since_gac: number|null;
+  fill?: string;
   geometry: any;
   id: number;
   latitude: string;
   longitude: string;
   parcel: string;
+  properties: any;
+  note?: string;
   state: string;
   updated_at: string;
   zip: string;
-  properties: any;
-  fill?: string;
 }

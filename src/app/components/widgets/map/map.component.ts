@@ -1,21 +1,25 @@
-import { LocationState } from './../../../store/map/location/location.state';
-import { User } from './../../../interfaces/user';
+import { User } from '../../../interfaces/user';
 import { Select, Store } from '@ngxs/store';
-import { Road } from './../../../interfaces/map/road';
-import { Location } from './../../../interfaces/map/location';
-import { Component, ElementRef, OnInit } from '@angular/core';
-import { LocationActions as LA } from 'src/app/store/map/location/location.action';
-import { RoadActions as RA } from './../../../store/map/road/road.action';
-import { merge, Observable, scheduled } from 'rxjs';
+
+import { Location } from '../../../interfaces/map/location';
+import { LocationState } from '../../../store/location/location.state';
+import { LocationActions as LA } from '../../../store/location/location.action';
+
+import { Road } from '../../../interfaces/map/road';
+import { RoadState } from '../../../store/road/road.state';
+import { RoadActions as RA } from '../../../store/road/road.action';
+
+import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
+import { fromEvent, merge, Observable, scheduled, Subscription } from 'rxjs';
 import * as d3 from 'd3';
 import * as SvgPanZoom from 'svg-pan-zoom';
-import { RoadState } from 'src/app/store/map/road/road.state';
+import { throttleTime } from 'rxjs/operators';
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.sass']
 })
-export class MapComponent implements OnInit {
+export class MapComponent implements OnInit, OnDestroy {
 
   // Commented properties from legacy. Delete if not used.
   // private gacs: array = [];
@@ -28,19 +32,17 @@ export class MapComponent implements OnInit {
   selectedGacs: any = 'gacs'
 
 
-  // Location info
-  locations: Location[] = [];
+  // Locations in store are different than d3 format used here.
+  locations: any = [];
   myLocation: Location;
   currentLocation: Location;
   lastLocation: Location;
-
   lastFill: string;
 
-  // Road info
-  roads: Road[] = [];
+  // Roads in store are different than d3 format used here.
+  roads: any = [];
 
-
-  // SVG groups on map. Arrays of geocoded data.
+  // SVG groups on map. Layers driven by geo locations and roads data.
   gLocations: any;
   gRoads: any;
 
@@ -49,30 +51,26 @@ export class MapComponent implements OnInit {
 
   // Declare properties.
   count: number;
-  exclusions: any;
-
-  // Map settings.
-  // TODO remove unneeded elements.
+  excludedLocations: number[];
 
   // SVG canvas for d3 map.
   svg: any;
-  // Div and dimensions for map.
 
+  // Dimensions for map.
   width: number;
   height: number;
-
-  // Div and dimensions for map container.
-  mapContainerHeight: number;
+  top: number;
+  left: number;
+  margin: number;
 
   // GeoObject with metadata about scale and display algorthm.
   projection: any;
 
   // Converts feature paths to screen coordinates based on projection.
   path: any;
+
   // Pan controller.
   pan: SvgPanZoom.Instance;
-  // pan: any;
-
 
   // gFriends: any;
   // gGacs: any;
@@ -80,7 +78,8 @@ export class MapComponent implements OnInit {
   // gMembers: User[];
   // gMyGacs: any;
 
-
+  // This listens for the window.resize event to re-render map.
+  resizeSubscription$: Subscription;
 
   constructor(
     public map: ElementRef,
@@ -88,6 +87,9 @@ export class MapComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // Watch for window resize event (i.e. changing phone orienation).
+    this.handleWindowResize();
+
     // Load a map
     // TODO - implement group id param on back end and pass it to these actions.
     // Will be the top level group for the neighborhood.
@@ -95,24 +97,38 @@ export class MapComponent implements OnInit {
     // Get all needed map data.
     merge(this.store.dispatch([new LA.GetIndex(), new RA.GetIndex()]))
       .subscribe(() => {
-        this.locations = this.store.selectSnapshot(LocationState.entities<Location>());
-        this.roads = this.store.selectSnapshot(RoadState.entities<Road>());
-        // console.log(this.locations, this.roads);
+        // Tranform locations from store into format d3 maps can use.
+        this.locations = this.store.selectSnapshot(LocationState.entities<Location>())
+          .map(e => {
+            return {
+              "type": "Feature",
+              "properties": { "id": e.id, "parcel": e.parcel,
+                              "address1": e.address1, "days_since_gac": e.days_since_gac,
+                              "note": e.note, "latitude": e.latitude, "longitude": e.longitude
+                            },
+              "geometry": JSON.parse(e.geometry)
+            };
+          });
 
-        // Initialize the map.
+        // Tranform roads from store into format d3 maps can use.
+        this.roads = this.store.selectSnapshot(RoadState.entities<Road>())
+          .map(e => {
+            return {
+              "type": "Feature",
+              "properties": { "id": e.id, "group": e.group, "name": e.name },
+              "geometry": JSON.parse(e.geometry)
+            };
+          });
+
+        // Initialize the map on first load.
         this.initializeMap();
         this.renderMap();
 
-        // On resize or phone orientation change.
-        // TODO - angularize this with @HostListener - https://angular.io/api/core/HostListener
-        // window.addEventListener("resize", setTimeout(() => {
-        //   this.initializeMap();
-        //   this.updateMap();
-        // }, 1000);
-
     });
+  }
 
-
+  ngOnDestroy() {
+    this.resizeSubscription$.unsubscribe();
   }
 
   setCurrentLocation(id: number) {
@@ -121,13 +137,14 @@ export class MapComponent implements OnInit {
 
 
   initializeMap() {
-    // this.width = window.innerWidth;
+    // If svg_map already exists, remove pan reference and old svg.
+    // delete this.pan ? this.pan : undefined;
+    const mapCheck = document.querySelector("#svg_map");
+    if (mapCheck) {
+      mapCheck.remove();
+    }
 
-    // 1. Margins, width, and height of map.
-    const margin = { top: 10, right: 10, bottom: 10, left: 10};
-    // Dimensions of map, including what's not shown in the viewbox.
-    this.width = 2000;
-    this.height = 2000;
+    this.setMapSizeAndPosition();
 
     // The projection translates geo coordinates (lat/lng) to pixel
     // locations on the map/screen.
@@ -139,10 +156,10 @@ export class MapComponent implements OnInit {
         //   roll/gamma - counter-clockwise rotation around the x-axis. 0 default.
         // Visualize here: https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/6DOF.svg/1200px-6DOF.svg.png
         // .rotate([Math.abs(this.myGeo[1]), 0])
-        // .rotate([111.875944, 0])
-        .rotate([40.560151, 0])
-        // This is the lat of the user to center the map on their home.
-        // .center([0, this.myGeo[0]])
+        // Centers horizontally with longitude.
+        .rotate([111.875944, 0])
+        // Center vertically with latitude.
+        .center([0, 40.560151])
         .translate([this.width / 2, this.height / 2]);
 
     // Converts feature paths to screen coordinates based on the projection.
@@ -151,99 +168,82 @@ export class MapComponent implements OnInit {
 
     this.svg = d3.select("#map")
         .append("svg")
-        // Limit viewBox to 800x800.
-        // TODO - make this dynamic based on screen size and orientation.
-        .attr('viewBox', '0 0 800 800')
-        .attr('preserveAspectRatio', 'xMidYMid')
-        .attr("width", this.width)
-        .attr("height", this.height);
+        .attr("id", "svg_map")
+        .attr("width", this.width + "px")
+        .attr("height", this.height + "px");
+        // SVG requires translation to move -- doesn't respect css margin.
+        // .append("g")
+        // .attr("transform", "translate(" + this.margin + "," + this.margin + ")");
 
     this.gLocations = this.svg.append("g");
     this.gRoads = this.svg.append("g");
 
-    this.exclusions = [99, 395];
+    this.excludedLocations = [99, 395];
     this.count = 0;
 
     // Enables interactive map navigation (pan, zoom).
-    // this.pan = SvgPanZoom('#svg_map', {
-    //     zoomEnabled: true,
-    //     controlIconsEnabled: false,
-    //     fit: false,
-    //     center: false,
-    //     minZoom: .2
-    // });
-
+    this.pan = SvgPanZoom('#svg_map', {
+        zoomEnabled: true,
+        controlIconsEnabled: true,
+        fit: false,
+        center: false,
+        minZoom: .6
+    });
   }
 
   renderMap() {
+    // Put this into that so we don't lose it in d3 callback scopes.
+    const that = this;
+
     this.gLocations.selectAll("path")
       .data(this.locations)
       .enter()
       .append('path')
-      .attr('d', this.path)
-      .style('fill', function(d: any) {
-        if (d) {
-          return 'green';
-        } else {
-          return 'red';
-        }
-          // return this.getFillColor(d, this.myLocation, this.exclusions);
+      .attr('fill', function(d: any) {
+        // if (d) {
+        //   return 'green';
+        // } else {
+        //   return 'red';
+        // }
+
+        return that.getFillColor(d);
+        // return this.getFillColor(d, this.myLocation, this.exclusions);
       })
-      // .attr("id", d => {
-      //     return d.properties.id;
-      // })
+      .attr("id", (d: any) => d.properties.id)
+      .attr("d", this.path)
+      .attr("stroke", "#333")
       // .on('click', d => {
       //     this.selectLocation(d);
       // })
       // .on('touchstart', d => {
       //     this.selectLocation(d);
       // })
-      // .attr("stroke", "#333")
-      // .attr("class", "parcels")
-      // .attr("d", this.geopath
-      // .append("title").text(d => {
-      //     return d.properties.address1;
-      // });
+      // .attr("class", "locations")
+      .append("title").text((d: any) => d.properties.address1);
 
-    // g_buildings.selectAll("path")
-    //     .data(buildings.features)
-    //     .enter()
-    //     .append("path")
-    //     .attr("fill", "rgba(231, 231, 231, .5)")
-    //     // .attr("fill", "lightgray")
-    //     .attr("class", "buildings hidden")
-    //     .attr("d", geopath);
+    // Roads
+    this.gRoads.selectAll("path")
+        .data(this.roads)
+        .enter()
+        .append("path")
+        .attr("id", (d: any) => "road" + d.properties.id)
+        .attr("stroke", "rgba(0,0,0,0)")
+        .attr("fill", "rgba(0,0,0,0)")
+        .attr("d", this.path);
 
-    // this.gRoads.selectAll("path")
-    //     .data(that.roads)
-    //     .enter()
-    //     .append("path")
-    //     .attr("id", (d, i) => {
-    //         return "road" + i;
-    //     })
-    //     .attr("stroke", "rgba(0,0,0,0)")
-    //     .attr("fill", "rgba(0,0,0,0)")
-    //     .attr("d", that.geopath);
-
-    // Different for park label.
-    // d3.select("#road0").attr("stroke", "none");
-
-    // this.gRoads.selectAll("text")
-    //     .data(this.roads)
-    //     .enter()
-    //     .append("text")
-    //     .attr("dx", "25")
-    //     .attr("dy", "6")
-    //     .append("textPath")
-    //     .attr("font-size", "16px")
-    //     .attr("stroke", "none")
-    //     .attr("fill", "black")
-    //     .attr("href", (d, i) => {
-    //         return "#road" + i;
-    //     })
-    //     .text((d, i) => {
-    //         return d.properties.name;
-    //     });
+    // Road labels (i.e. street names)
+    this.gRoads.selectAll("text")
+        .data(this.roads)
+        .enter()
+        .append("text")
+        .attr("dx", "25")
+        .attr("dy", "6")
+        .append("textPath")
+        .attr("font-size", "16px")
+        .attr("stroke", "none")
+        .attr("fill", "black")
+        .attr("href", (d: any) => "#road" + d.properties.id)
+        .text((d: any) => d.properties.name);
 
     // g_members.selectAll("circle")
     //     .data(parcels)
@@ -280,38 +280,38 @@ export class MapComponent implements OnInit {
    *
    * @return {string} The color/rgba string.
    */
-  private getFillColor(feature: any, myLocation: Location, exclusions:any): string {
+  private getFillColor(feature: any): string {
     // Make exclusions gray.
-    if (exclusions.indexOf(parseInt(feature.properties.id)) > -1) {
+    if (this.excludedLocations.indexOf(parseInt(feature.properties.id)) > -1) {
         return "lightgray";
     }
 
-    // Selected neighbor.
-    if (this.currentLocation) {
-        if (this.currentLocation.properties.id == feature.properties.id) {
-            return "rgba(52, 144, 220, .5)";
-        }
-    }
-
-    // Make my home yellow.
-    if (myLocation == feature.properties.id) {
+    // Make my home yellow unless its selected below.
+    if (this.myLocation == feature.properties.id) {
         return "rgba(255,237,74, .50)";
     }
 
-    // All other homes are colored based on days since someone gad (gave a damn).
-    const daysSinceGac = 500; // gacs.get(feature.properties.id) ? gacs.get(feature.properties.id).gac : 500;
-    const theGacs = eval(this.selectedGacs);
+    // Selected neighbor.
+    // if (this.currentLocation) {
+    //     if (this.currentLocation.properties.id == feature.properties.id) {
+    //         return "rgba(52, 144, 220, .5)";
+    //     }
+    // }
+
+    // All other homes are colored based on days since someone gave a crap.
+
+    const daysSinceGac = feature.properties.days_since_gac;
     let fillOpacity = 0;
-    if (daysSinceGac < 30) {
+    if (daysSinceGac && daysSinceGac < 5000) {
         // Opacity can drop down to 25% before turning white.
         fillOpacity = (30 - daysSinceGac) / 30;
         if (fillOpacity < .25) fillOpacity = .25;
         // Leave some transparency to show icon underlays.
-        if (fillOpacity > .80) fillOpacity = .80;
+        // if (fillOpacity > .80) fillOpacity = .80;
     }
 
     if (!fillOpacity) {
-        return "rgba(255,255,255, .1)";
+        return "rgba(255,255,255, 1)";
     } else {
         return "rgba(126, 183, 129," + fillOpacity + ")";
     }
@@ -361,6 +361,44 @@ export class MapComponent implements OnInit {
 
     // $("#selected").show();
     // $("#welcome").hide();
+  }
+
+  private handleWindowResize() {
+    const windowResize$ = fromEvent(window, 'resize');
+    this.resizeSubscription$ = windowResize$.pipe(
+      throttleTime(500)
+    ).subscribe(() => {
+      this.initializeMap();
+      this.renderMap();
+    });
+  }
+
+  /**
+   * Return nav heigh based on screen size.
+   *
+   * @returns number - Nav height.
+   */
+  private navHeight(): number {
+    return window.innerWidth > 600 ? 64 : 56;
+  }
+
+  private setMapSizeAndPosition(): void {
+    // Margin is used for the #svg_map inside the #map div.
+    // For now, just apply one to all sides.
+    this.margin = 20;
+
+    // Map dimensions and placement.
+    this.width = window.innerWidth - (this.margin * 2);
+    // Subtract top and bottom nav heights from map height.
+    this.height = window.innerHeight - (this.navHeight() * 2);
+    this.top = this.margin + this.navHeight();
+    this.left = this.margin;
+
+    d3.select("#map")
+      .style("width", this.width + "px")
+      .style("height", this.height + "px")
+      .style("top", this.top + "px")
+      .style("left", this.left + "px");
   }
 
 }

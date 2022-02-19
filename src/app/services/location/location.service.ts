@@ -8,7 +8,7 @@ import { Injectable } from '@angular/core';
 })
 export class LocationService extends AbstractEntityService<Location> {
 
-  url = this.baseUrl + 'mapdata/locations';
+  url = this.baseUrl + 'location';
 
   constructor(
     private httpConcrete: HttpClient

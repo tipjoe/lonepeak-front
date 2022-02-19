@@ -8,7 +8,7 @@ import { Injectable } from '@angular/core';
 })
 export class RoadService extends AbstractEntityService<Road> {
 
-  url = this.baseUrl + 'mapdata/roads';
+  url = this.baseUrl + 'road';
 
   constructor(
     private httpConcrete: HttpClient
