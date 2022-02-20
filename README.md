@@ -3,6 +3,19 @@
 This (`lonepeak-front`) is the angular front end repository that works together with `lonepeak-api`
 (Laravel back end api).
 
+Lonepeak is micro-community software that helps neighbors meet and do stuff
+together. It all starts with "giving a crap" about each other.
+
+This is open source software that anyone can use freely. It's a volunteer
+passion project. When we get time, we'll create some instructions to use it.
+If your neighborhood is interested in using it but you don't have a technical
+person to help, we may be able to refer you to someone who can help for a
+fee but we don't manage it.
+
+If you've started learning software development and would like to build your
+resume by contributing to a "real" project, let's talk. Just create an
+issue here in github (on this repo) and we'll be in touch.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
