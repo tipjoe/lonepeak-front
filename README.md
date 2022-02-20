@@ -4,7 +4,9 @@ This (`lonepeak-front`) is the angular front end repository that works together 
 (Laravel back end api).
 
 Lonepeak is micro-community software that helps neighbors meet and do stuff
-together. It all starts with "giving a crap" about each other.
+together. It all starts with "giving a crap" about each other. Here's a short
+[video where Grumpy Cat helps you see the idea] (https://youtu.be/4ncsM6Beb8A)
+(though it's a bit outdated).
 
 This is open source software that anyone can use freely. It's a volunteer
 passion project. When we get time, we'll create some instructions to use it.
