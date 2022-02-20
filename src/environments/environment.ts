@@ -9,7 +9,7 @@ export const environment = {
   // Legacy back end.
   // apiUrl: 'https://lonepeak.test/',
   // New v2 back end.
-  apiUrl: 'https://gackback.test/',
+  apiUrl: 'http://localhost/',
   appName: 'LPPN',
   appLongName: 'Lone Peak Park Neighbors',
 };

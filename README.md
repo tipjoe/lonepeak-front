@@ -1,6 +1,7 @@
-# Gackfront
+# Lonepeak - Front End
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.3.
+This (`lonepeak-front`) is the angular front end repository that works together with `lonepeak-api`
+(Laravel back end api).
 
 ## Development server
 
