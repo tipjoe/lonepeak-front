@@ -51,6 +51,8 @@ import { MeFormComponent } from './components/forms/me-form/me-form.component';
 import { PostFormComponent } from './components/forms/post-form/post-form.component';
 import { TaskFormComponent } from './components/forms/task-form/task-form.component';
 import { TextFormComponent } from './components/forms/text-form/text-form.component';
+import { RegistrationComponent } from './components/forms/registration-form/registration-form.component';
+import { AdminContactComponent } from './components/forms/admin-contact-form/admin-contact-form.component';
 
 // Widgets
 import { MapComponent } from './components/widgets/map/map.component';
@@ -74,8 +76,6 @@ import { NotificationState } from './store/notification/notification.state';
 import { PostState } from './store/post/post.state';
 import { RoadState } from './store/road/road.state';
 import { UserState } from './store/user/user.state';
-import { AdminContactComponent } from './components/forms/admin-contact/admin-contact.component';
-import { RegistrationComponent } from './components/forms/registration/registration.component';
 
 // Internal Services
 // App-based services are made available globally with the

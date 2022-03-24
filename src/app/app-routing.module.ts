@@ -31,8 +31,8 @@ import { MeFormComponent } from './components/forms/me-form/me-form.component';
 // import { PostFormComponent } from './components/forms/post-form/post-form.component';
 import { TaskFormComponent } from './components/forms/task-form/task-form.component';
 import { TextFormComponent } from './components/forms/text-form/text-form.component';
-import { AdminContactComponent } from './components/forms/admin-contact/admin-contact.component';
-import { RegistrationComponent } from './components/forms/registration/registration.component';
+import { AdminContactComponent } from './components/forms/admin-contact-form/admin-contact-form.component';
+import { RegistrationComponent } from './components/forms/registration-form/registration-form.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
