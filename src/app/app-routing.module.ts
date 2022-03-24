@@ -32,6 +32,7 @@ import { MeFormComponent } from './components/forms/me-form/me-form.component';
 import { TaskFormComponent } from './components/forms/task-form/task-form.component';
 import { TextFormComponent } from './components/forms/text-form/text-form.component';
 import { AdminContactComponent } from './components/forms/admin-contact/admin-contact.component';
+import { RegistrationComponent } from './components/forms/registration/registration.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -51,6 +52,7 @@ const routes: Routes = [
   { path: 'tasks', component: TasksComponent },
   { path: 'user', component: UserComponent },
   { path: 'contact', component: AdminContactComponent },
+  { path: 'registration', component: RegistrationComponent },
 ];
 
 @NgModule({
