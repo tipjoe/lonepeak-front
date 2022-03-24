@@ -75,6 +75,7 @@ import { PostState } from './store/post/post.state';
 import { RoadState } from './store/road/road.state';
 import { UserState } from './store/user/user.state';
 import { AdminContactComponent } from './components/forms/admin-contact/admin-contact.component';
+import { RegistrationComponent } from './components/forms/registration/registration.component';
 
 // Internal Services
 // App-based services are made available globally with the
@@ -118,6 +119,7 @@ import { AdminContactComponent } from './components/forms/admin-contact/admin-co
     TextFormComponent,
     UserComponent,
     AdminContactComponent,
+    RegistrationComponent,
   ],
 
   // Modules are imported

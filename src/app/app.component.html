@@ -1,10 +1,8 @@
-
 <app-nav></app-nav>
 
 <div *ngIf="isAlertVisible" class="w-full p-4 bg-yellow-200 text-center relative">
   I'm an alert
-  <mat-icon class="absolute right-1 top-1 cursor-pointer"
-    (click)="isAlertVisible=false">
+  <mat-icon class="absolute right-1 top-1 cursor-pointer" (click)="isAlertVisible=false">
     close
   </mat-icon>
 </div>
@@ -16,4 +14,3 @@
 
   <router-outlet></router-outlet>
 </div>
-
