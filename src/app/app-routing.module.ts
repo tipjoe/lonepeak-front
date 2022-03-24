@@ -31,7 +31,7 @@ import { MeFormComponent } from './components/forms/me-form/me-form.component';
 // import { PostFormComponent } from './components/forms/post-form/post-form.component';
 import { TaskFormComponent } from './components/forms/task-form/task-form.component';
 import { TextFormComponent } from './components/forms/text-form/text-form.component';
-
+import { AdminContactComponent } from './components/forms/admin-contact/admin-contact.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -50,11 +50,11 @@ const routes: Routes = [
   { path: 'task', component: TaskComponent },
   { path: 'tasks', component: TasksComponent },
   { path: 'user', component: UserComponent },
-
+  { path: 'contact', component: AdminContactComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

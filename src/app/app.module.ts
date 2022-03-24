@@ -74,6 +74,7 @@ import { NotificationState } from './store/notification/notification.state';
 import { PostState } from './store/post/post.state';
 import { RoadState } from './store/road/road.state';
 import { UserState } from './store/user/user.state';
+import { AdminContactComponent } from './components/forms/admin-contact/admin-contact.component';
 
 // Internal Services
 // App-based services are made available globally with the
@@ -116,6 +117,7 @@ import { UserState } from './store/user/user.state';
     TasksComponent,
     TextFormComponent,
     UserComponent,
+    AdminContactComponent,
   ],
 
   // Modules are imported
@@ -137,27 +139,30 @@ import { UserState } from './store/user/user.state';
     //
     // forRoot contains configurations for a module and globally instantiates
     // the module as a singleton (only one instance in the application).
-    NgxsModule.forRoot([
-      ChatState,
-      EventState,
-      GacState,
-      GroupState,
-      LocationState,
-      RoadState,
-      MessageState,
-      NotificationState,
-      PostState,
-      UserState,
-    ], {
+    NgxsModule.forRoot(
+      [
+        ChatState,
+        EventState,
+        GacState,
+        GroupState,
+        LocationState,
+        RoadState,
+        MessageState,
+        NotificationState,
+        PostState,
+        UserState,
+      ],
+      {
         developmentMode: !environment.production,
         selectorOptions: {
           suppressErrors: true,
           // `false` will be the default for `injectContainerState` in v4.
           // `true` is the current default, but deprecated.
           // See https://www.ngxs.io/advanced/optimizing-selectors
-          injectContainerState: false
-        }
-    }),
+          injectContainerState: false,
+        },
+      }
+    ),
     NgxsReduxDevtoolsPluginModule.forRoot(),
 
     // Quill wysywig -- Note: weird errors so don't use for now.
@@ -167,9 +172,8 @@ import { UserState } from './store/user/user.state';
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable
       // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000'
-    })
-
+      registrationStrategy: 'registerWhenStable:30000',
+    }),
   ],
 
   // Generically, any functionality you 'provide' to your app via DI can be
@@ -222,13 +226,12 @@ import { UserState } from './store/user/user.state';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: WithCredentialsInterceptor,
-      multi: true
-    }
-
+      multi: true,
+    },
   ],
 
   // This is the root component angular creates and inserts into index.html.
   // bootstrap should only be defined in this root module.
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
