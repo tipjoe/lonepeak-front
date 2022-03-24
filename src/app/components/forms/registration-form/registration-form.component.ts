@@ -9,4 +9,6 @@ export class RegistrationComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  referrer = 'Joe Tippets';
 }
