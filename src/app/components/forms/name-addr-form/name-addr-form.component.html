@@ -1,14 +1,14 @@
-<div>
-  <mat-form-field appearance="fill">
+<div class="grid grid-cols-2">
+  <mat-form-field appearance="fill" class="col-span-2 md:col-span-1 md:pr-1">
     <mat-label>First name</mat-label>
-    <input matInput name="first">
+    <input matInput [name]="first">
   </mat-form-field>
-  <mat-form-field appearance="fill">
+  <mat-form-field appearance="fill" class="col-span-2 md:col-span-1 md:pl-1">
     <mat-label>Last name</mat-label>
-    <input matInput name="last">
+    <input matInput [name]="last">
   </mat-form-field>
-  <mat-form-field appearance="fill">
+  <mat-form-field appearance="fill" class="col-span-2">
     <mat-label>Address</mat-label>
-    <input matInput name="address">
+    <input matInput [name]="address">
   </mat-form-field>
 </div>
