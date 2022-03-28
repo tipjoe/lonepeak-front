@@ -1,14 +1,14 @@
 <div class="grid grid-cols-2">
   <mat-form-field appearance="fill" class="col-span-2 md:col-span-1 md:pr-1">
     <mat-label>First name</mat-label>
-    <input matInput [name]="first">
+    <input matInput name="first" [(ngModel)]="first">
   </mat-form-field>
   <mat-form-field appearance="fill" class="col-span-2 md:col-span-1 md:pl-1">
     <mat-label>Last name</mat-label>
-    <input matInput [name]="last">
+    <input matInput name="last" [(ngModel)]="last">
   </mat-form-field>
   <mat-form-field appearance="fill" class="col-span-2">
     <mat-label>Address</mat-label>
-    <input matInput [name]="address">
+    <input matInput name="address" [(ngModel)]="address">
   </mat-form-field>
 </div>

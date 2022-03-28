@@ -1,5 +1,6 @@
 // System and Third-party
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { environment } from '../environments/environment';
@@ -139,6 +140,7 @@ import { UserState } from './store/user/user.state';
     // modules can import CommonModule, a subset of this.
     BrowserModule,
     HttpClientModule,
+    FormsModule,
 
     // Material Design Components
     MaterialImportModule,
