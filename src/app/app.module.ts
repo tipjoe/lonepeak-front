@@ -37,6 +37,7 @@ import { PostComponent } from './components/pages/post/post.component';
 import { TaskComponent } from './components/pages/task/task.component';
 import { TasksComponent } from './components/pages/tasks/tasks.component';
 import { UserComponent } from './components/pages/user/user.component';
+import { RegistrationComponent } from './components/pages/registration/registration.component';
 
 // Admin
 import { MessageCenterComponent } from './components/admin/message-center/message-center.component';
@@ -51,12 +52,15 @@ import { MeFormComponent } from './components/forms/me-form/me-form.component';
 import { PostFormComponent } from './components/forms/post-form/post-form.component';
 import { TaskFormComponent } from './components/forms/task-form/task-form.component';
 import { TextFormComponent } from './components/forms/text-form/text-form.component';
-import { RegistrationComponent } from './components/forms/registration-form/registration-form.component';
+import { NameAddrFormComponent } from './components/forms/name-addr-form/name-addr-form.component';
+import { QuestionsFormComponent } from './components/forms/questions-form/questions-form.component';
+import { VerificationFormComponent } from './components/forms/verification-form/verification-form.component';
 import { AdminContactComponent } from './components/forms/admin-contact-form/admin-contact-form.component';
 
 // Widgets
 import { MapComponent } from './components/widgets/map/map.component';
 import { PostsComponent } from './components/widgets/posts/posts.component';
+import { AboutSidenavComponent } from './components/widgets/about-sidenav/about-sidenav.component';
 
 // Directives
 import { AutofocusDirective } from './directives/autofocus/autofocus.directive';
@@ -119,6 +123,10 @@ import { UserState } from './store/user/user.state';
     TextFormComponent,
     UserComponent,
     AdminContactComponent,
+    NameAddrFormComponent,
+    QuestionsFormComponent,
+    VerificationFormComponent,
+    AboutSidenavComponent,
     RegistrationComponent,
   ],
 

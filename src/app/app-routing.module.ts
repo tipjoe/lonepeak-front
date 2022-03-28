@@ -16,6 +16,7 @@ import { PostComponent } from './components/pages/post/post.component';
 import { TaskComponent } from './components/pages/task/task.component';
 import { TasksComponent } from './components/pages/tasks/tasks.component';
 import { UserComponent } from './components/pages/user/user.component';
+import { RegistrationComponent } from './components/pages/registration/registration.component';
 
 // For testing only -- remove when done.
 import { MapComponent } from './components/widgets/map/map.component';
@@ -32,7 +33,6 @@ import { MeFormComponent } from './components/forms/me-form/me-form.component';
 import { TaskFormComponent } from './components/forms/task-form/task-form.component';
 import { TextFormComponent } from './components/forms/text-form/text-form.component';
 import { AdminContactComponent } from './components/forms/admin-contact-form/admin-contact-form.component';
-import { RegistrationComponent } from './components/forms/registration-form/registration-form.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
