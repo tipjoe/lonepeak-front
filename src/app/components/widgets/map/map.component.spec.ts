@@ -1,6 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Store } from '@ngxs/store';
+import { of } from 'rxjs';
 
 import { MapComponent } from './map.component';
+
+
+// Here, we're not testing the store (ngxs) but it's a dependency of this
+// component so we'll mock it. See providers array below.
+class StoreMock {
+  select = jasmine.createSpy().and.returnValue(of())
+  dispatch = jasmine.createSpy()
+}
 
 describe('MapComponent', () => {
   let component: MapComponent;
@@ -8,7 +18,19 @@ describe('MapComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MapComponent ]
+      // imports: [] for modules.
+
+      // declarations: [] for components.
+      declarations: [ MapComponent ],
+
+      // TODO: Http stuff with test fakes.
+      // providers: [] for services.
+      providers: [
+        {
+          provide: Store,
+          useClass: StoreMock
+        }
+      ]
     })
     .compileComponents();
   });
@@ -16,6 +38,8 @@ describe('MapComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(MapComponent);
     component = fixture.componentInstance;
+    console.log('map comp', component);
+
     fixture.detectChanges();
   });
 
@@ -23,8 +47,8 @@ describe('MapComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render a neighborhood map', () => {
+  // it('should render a neighborhood map', () => {
 
-  });
+  // });
 
 });

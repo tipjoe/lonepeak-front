@@ -1,14 +1,14 @@
 // System and Third-party
-import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core';
+import { MaterialImportModule } from './imports/material';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { environment } from '../environments/environment';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import { MaterialImportModule } from './imports/material';
 
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { NgxImageCompressService } from 'ngx-image-compress';
@@ -35,33 +35,33 @@ import { MessageComponent } from './components/pages/message/message.component';
 import { MessagesComponent } from './components/pages/messages/messages.component';
 import { NotificationsComponent } from './components/pages/notifications/notifications.component';
 import { PostComponent } from './components/pages/post/post.component';
+import { RegistrationComponent } from './components/pages/registration/registration.component';
 import { TaskComponent } from './components/pages/task/task.component';
 import { TasksComponent } from './components/pages/tasks/tasks.component';
 import { UserComponent } from './components/pages/user/user.component';
-import { RegistrationComponent } from './components/pages/registration/registration.component';
 
 // Admin
 import { MessageCenterComponent } from './components/admin/message-center/message-center.component';
 
 // Forms
+import { AdminContactComponent } from './components/forms/admin-contact-form/admin-contact-form.component';
 import { AddPhotoFormComponent } from './components/forms/add-photo-form/add-photo-form.component';
 import { ChatFormComponent } from './components/forms/chat-form/chat-form.component';
 import { EmailFormComponent } from './components/forms/email-form/email-form.component';
 import { EventFormComponent } from './components/forms/event-form/event-form.component';
 import { GroupFormComponent } from './components/forms/group-form/group-form.component';
 import { MeFormComponent } from './components/forms/me-form/me-form.component';
+import { NameAddressFormComponent } from './components/forms/name-address-form/name-address-form.component';
 import { PostFormComponent } from './components/forms/post-form/post-form.component';
+import { QuestionsFormComponent } from './components/forms/questions-form/questions-form.component';
 import { TaskFormComponent } from './components/forms/task-form/task-form.component';
 import { TextFormComponent } from './components/forms/text-form/text-form.component';
-import { NameAddrFormComponent } from './components/forms/name-addr-form/name-addr-form.component';
-import { QuestionsFormComponent } from './components/forms/questions-form/questions-form.component';
 import { VerificationFormComponent } from './components/forms/verification-form/verification-form.component';
-import { AdminContactComponent } from './components/forms/admin-contact-form/admin-contact-form.component';
 
 // Widgets
+import { AboutSidenavComponent } from './components/widgets/about-sidenav/about-sidenav.component';
 import { MapComponent } from './components/widgets/map/map.component';
 import { PostsComponent } from './components/widgets/posts/posts.component';
-import { AboutSidenavComponent } from './components/widgets/about-sidenav/about-sidenav.component';
 
 // Directives
 import { AutofocusDirective } from './directives/autofocus/autofocus.directive';
@@ -92,8 +92,11 @@ import { UserState } from './store/user/user.state';
 // See https://angular.io/guide/architecture-modules
 @NgModule({
   // Components (a type of directive), Directives, and Pipes are declared
+  // Let's keep these alphabetical so they're easier to find.
   declarations: [
+    AboutSidenavComponent,
     AddPhotoFormComponent,
+    AdminContactComponent,
     AppComponent,
     AutofocusDirective,
     ChatComponent,
@@ -113,22 +116,20 @@ import { UserState } from './store/user/user.state';
     MessageCenterComponent,
     MessageComponent,
     MessagesComponent,
+    NameAddressFormComponent,
     NavComponent,
     NotificationsComponent,
     PostComponent,
     PostsComponent,
     PostFormComponent,
+    QuestionsFormComponent,
+    RegistrationComponent,
     TaskComponent,
     TaskFormComponent,
     TasksComponent,
     TextFormComponent,
     UserComponent,
-    AdminContactComponent,
-    NameAddrFormComponent,
-    QuestionsFormComponent,
     VerificationFormComponent,
-    AboutSidenavComponent,
-    RegistrationComponent,
   ],
 
   // Modules are imported
@@ -139,8 +140,8 @@ import { UserState } from './store/user/user.state';
     // BrowserModule should only be registered here in app.module. Other
     // modules can import CommonModule, a subset of this.
     BrowserModule,
-    HttpClientModule,
     FormsModule,
+    HttpClientModule,
 
     // Material Design Components
     MaterialImportModule,
@@ -223,7 +224,6 @@ import { UserState } from './store/user/user.state';
     // Consider using these in feature modules for better isolation and
     // lazy loading.
     NgxImageCompressService,
-
     // HTTP_INTERCEPTORS are a unique case since there can be multiple values/
     // interceptors with the same provider token (HTTP_INTERCEPTORS). In this
     // case, the provider token is not a class, but an lookup key called an
