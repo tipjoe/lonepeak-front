@@ -3,10 +3,6 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
-  // This is just done here as an example. Normally we wouldn't test
-  // vendor-provided code (it's already well tested). Here we're doing it
-  // to see if it's correctly loading something we configure (the appName
-  // from our environment.ts file).
 
   beforeEach(async () => {
     // See app.module.ts. The TestBed is just loading the subset of
