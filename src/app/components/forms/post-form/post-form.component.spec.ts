@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NgxImageCompressService } from 'ngx-image-compress';
 
 import { PostFormComponent } from './post-form.component';
 
@@ -8,7 +9,13 @@ describe('PostFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PostFormComponent ]
+      // imports: [] for modules.
+      // declarations: [] for components.
+      declarations: [ PostFormComponent ],
+      // providers: [] for services.
+      providers: [
+        NgxImageCompressService
+      ]
     })
     .compileComponents();
   });
