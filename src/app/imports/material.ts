@@ -40,6 +40,7 @@ import { NgModule } from '@angular/core';
 
 @NgModule({
   exports: [
+    MatAutocompleteModule,
     MatBadgeModule,
     MatButtonModule,
     MatCardModule,
@@ -51,6 +52,7 @@ import { NgModule } from '@angular/core';
     MatMenuModule,
     MatSidenavModule,
     MatSliderModule,
+    MatStepperModule,
     MatToolbarModule,
     MatTooltipModule
   ]
