@@ -52,7 +52,7 @@ const routes: Routes = [
   { path: 'tasks', component: TasksComponent },
   { path: 'user', component: UserComponent },
   { path: 'contact', component: AdminContactComponent },
-  { path: 'registration', component: RegistrationComponent },
+  { path: 'join', component: RegistrationComponent },
 ];
 
 @NgModule({
