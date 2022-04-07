@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgxImageCompressService } from 'ngx-image-compress';
+// import { NgxImageCompressService } from 'ngx-image-compress';
 // import { Router } from '@angular/router';
 
 @Component({
@@ -12,7 +12,7 @@ export class PostFormComponent implements OnInit {
   compressedImage: string = '';
 
   constructor(
-    private imageService: NgxImageCompressService // private router: Router
+    // private imageService: NgxImageCompressService // private router: Router
   ) {}
 
   ngOnInit(): void {

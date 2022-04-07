@@ -11,7 +11,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { NgxImageCompressService } from 'ngx-image-compress';
+// import { NgxImageCompressService } from 'ngx-image-compress';
 // import { QuillModule } from 'ngx-quill';
 
 // Interceptors
@@ -223,7 +223,7 @@ import { UserState } from './store/user/user.state';
     // Only list externally provided services that don't implement @Injectable.
     // Consider using these in feature modules for better isolation and
     // lazy loading.
-    NgxImageCompressService,
+    // NgxImageCompressService,
     // HTTP_INTERCEPTORS are a unique case since there can be multiple values/
     // interceptors with the same provider token (HTTP_INTERCEPTORS). In this
     // case, the provider token is not a class, but an lookup key called an
