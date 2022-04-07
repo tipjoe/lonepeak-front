@@ -13,11 +13,11 @@
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 // $gackfront-primary: mat.define-palette(mat.$indigo-palette);
-$gackfront-primary: mat.define-palette(mat.$blue-palette, A400, A500, A800);
-$gackfront-accent: mat.define-palette(mat.$green-palette, A700, A800, A900);
+$gackfront-primary: mat.define-palette(mat.$blue-palette, A400, 500, 800);
+$gackfront-accent: mat.define-palette(mat.$green-palette, A700, 800, 900);
 
 // The warn palette is optional (defaults to red).
-$gackfront-warn: mat.define-palette(mat.$pink-palette, A400, A500, A800);
+$gackfront-warn: mat.define-palette(mat.$pink-palette, A400, 500, 800);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".

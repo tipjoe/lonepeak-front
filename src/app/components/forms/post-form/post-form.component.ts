@@ -27,16 +27,16 @@ export class PostFormComponent implements OnInit {
   }
 
   compressImage() {
-    this.imageService.uploadFile().then(({ image, orientation }) => {
-      // console.warn('Size in bytes was:', this.imageService.byteCount(image));
+    // this.imageService.uploadFile().then(({ image, orientation }) => {
+    //   // console.warn('Size in bytes was:', this.imageService.byteCount(image));
 
-      this.imageService
-        .compressFile(image, orientation, 50, 50)
-        .then((result) => {
-          this.compressedImage = result;
-          // console.warn('Size in bytes is now:', this.imageService.byteCount(result));
-        });
-    });
+    //   this.imageService
+    //     .compressFile(image, orientation, 50, 50)
+    //     .then((result) => {
+    //       this.compressedImage = result;
+    //       // console.warn('Size in bytes is now:', this.imageService.byteCount(result));
+    //     });
+    // });
   }
 
   textAreaHeight(event: KeyboardEvent) {
