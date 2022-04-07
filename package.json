@@ -10,18 +10,18 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "~12.2.0",
+    "@angular/animations": "~13.3.2",
     "@angular/cdk": "^12.2.3",
-    "@angular/common": "~12.2.0",
-    "@angular/compiler": "~12.2.0",
-    "@angular/core": "~12.2.0",
+    "@angular/common": "~13.3.2",
+    "@angular/compiler": "~13.3.2",
+    "@angular/core": "~13.3.2",
     "@angular/flex-layout": "^12.0.0-beta.34",
-    "@angular/forms": "~12.2.0",
+    "@angular/forms": "~13.3.2",
     "@angular/material": "^12.2.3",
-    "@angular/platform-browser": "~12.2.0",
-    "@angular/platform-browser-dynamic": "~12.2.0",
-    "@angular/router": "~12.2.0",
-    "@angular/service-worker": "~12.2.0",
+    "@angular/platform-browser": "~13.3.2",
+    "@angular/platform-browser-dynamic": "~13.3.2",
+    "@angular/router": "~13.3.2",
+    "@angular/service-worker": "~13.3.2",
     "@ctrl/ngx-emoji-mart": "^6.0.1",
     "@ngxs/store": "^3.7.2",
     "d3": "^7.1.1",
@@ -33,9 +33,9 @@
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~12.2.3",
-    "@angular/cli": "~12.2.3",
-    "@angular/compiler-cli": "~12.2.0",
+    "@angular-devkit/build-angular": "~13.3.2",
+    "@angular/cli": "~13.3.2",
+    "@angular/compiler-cli": "~13.3.2",
     "@ngxs/devtools-plugin": "^3.7.2",
     "@types/d3": "^7.0.0",
     "@types/jasmine": "~3.8.0",
@@ -50,6 +50,6 @@
     "karma-jasmine-html-reporter": "~1.7.0",
     "postcss": "^8.3.6",
     "tailwindcss": "^2.2.9",
-    "typescript": "~4.3.5"
+    "typescript": "~4.6.3"
   }
 }
