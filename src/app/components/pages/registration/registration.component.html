@@ -1,8 +1,6 @@
 <header class="-mt-20">
   <div id="big-logo" class="sm:text-center">
-    <img src="assets/images/lppn-logo-gac.gif"
-      class="sm:inline relative -left-6 sm:left-0"
-      style="max-width: none">
+    <img src="assets/images/lppn-logo-gac.gif" class="sm:inline relative -left-6 sm:left-0" style="max-width: none">
   </div>
 </header>
 <div class="my-6 fade-in">
@@ -18,17 +16,13 @@
 
     </p>
     <div class="text-center mt-8 mb-5">
-      <button mat-raised-button color="primary" (click)="learnMore()"
-        class="w-full sm:w-auto"
-        aria-label="Learn more"
+      <button mat-raised-button color="primary" (click)="learnMore()" class="w-full sm:w-auto" aria-label="Learn more"
         matTooltip="Learn more">
         Learn More
       </button>
     </div>
     <div class="text-center mt-5 mb-8">
-      <button mat-raised-button color="accent" (click)="join()"
-        class="w-full sm:w-auto"
-        aria-label="Join"
+      <button mat-raised-button color="accent" (click)="join()" class="w-full sm:w-auto" aria-label="Join"
         matTooltip="Join">
         Join the Neighborhood!
       </button>
@@ -36,10 +30,7 @@
   </div>
 
   <!-- Join/registration form -->
-  <div *ngIf="currentState === 1"
-    [class]="{ 'fade-in': currentState === 1 }"
-    class="-ml-8"
-  >
+  <div *ngIf="currentState === 1" [class]="{ 'fade-in': currentState === 1 }" class="-ml-8">
 
     <mat-stepper orientation="vertical" linear="true" #stepper>
       <mat-step [stepControl]="step1FormGroup">
@@ -62,9 +53,7 @@
           </mat-form-field>
 
           <div>
-            <button mat-raised-button (click)="join()"
-              aria-label="Back"
-              matTooltip="Back">
+            <button mat-raised-button (click)="join()" aria-label="Back" matTooltip="Back">
               Back to Join
             </button>
             <button mat-button matStepperNext>Next</button>
@@ -100,25 +89,21 @@
   </div>
 
   <div *ngIf="currentState === 2" [class]="{ 'fade-in': currentState === 2 }">
-    <button mat-raised-button (click)="learnMore()"
-      aria-label="Back"
-      matTooltip="Back">
+    <button mat-raised-button (click)="learnMore()" aria-label="Back" matTooltip="Back">
       Back to Join
     </button>
 
     <!-- Plug this within a side nav. -->
     <div class="my-8">
-      <app-about></app-about>
+      <!-- <app-about></app-about> -->
     </div>
 
-    <button mat-raised-button (click)="learnMore()"
-      aria-label="Back"
-      matTooltip="Back">
+    <button mat-raised-button (click)="learnMore()" aria-label="Back" matTooltip="Back">
       Back to Join
     </button>
   </div>
 
   <div class="my-8">
-    <app-referrer-card></app-referrer-card>
+    <!-- <app-referrer-card></app-referrer-card> -->
   </div>
 </div>
