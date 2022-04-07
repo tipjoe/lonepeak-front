@@ -9,13 +9,11 @@
   <div *ngIf="currentState === 0" [class]="{ 'fade-in': currentState === 0 }">
     <p>
       <strong>Joe Tippetts</strong>
-      has invited you to Lone Peak Park Neighbors!
-      <strong>We’re all about giving a crap!</strong>
+      gives a crap about you and invited you to our group!
     </p>
     <p>
-      You know... making our neighborhood more friendly, inclusive, beautiful,
-      and safe for everyone.
-
+      Giving a crap for each other makes our neighborhood more friendly, inclusive,
+      beautiful, and safe.
     </p>
     <div class="text-center mt-8 mb-5">
       <button mat-raised-button color="primary" (click)="learnMore()"
@@ -30,7 +28,7 @@
         class="w-full sm:w-auto"
         aria-label="Join"
         matTooltip="Join">
-        Join the Neighborhood!
+        Join the Neighborhood Group!
       </button>
     </div>
   </div>
@@ -42,6 +40,9 @@
   >
 
     <mat-stepper orientation="vertical" linear="true" #stepper>
+      <ng-template matStepperIcon="edit">
+        <mat-icon>check</mat-icon>
+      </ng-template>
       <mat-step [stepControl]="step1FormGroup">
         <form [formGroup]="step1FormGroup">
           <ng-template matStepLabel>Hi, what's your name?</ng-template>
@@ -58,15 +59,32 @@
 
           <mat-form-field appearance="fill">
             <mat-label>Address</mat-label>
-            <input matInput placeholder="Address" formControlName="address" required>
+            <input type="text"
+              placeholder="Enter your address"
+              aria-label="Address"
+              matInput
+              [formControl]="address"
+              [matAutocomplete]="auto"
+              required
+            >
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let option of filteredAddressOptions$ | async" [value]="option.value">
+                {{ option.value }}
+              </mat-option>
+            </mat-autocomplete>
           </mat-form-field>
 
+          <!-- <mat-form-field appearance="fill">
+            <mat-label>Address</mat-label>
+            <input matInput placeholder="Address" formControlName="address" required>
+          </mat-form-field> -->
+
           <div>
-            <button mat-raised-button (click)="join()"
+            <!-- <button mat-raised-button (click)="join()"
               aria-label="Back"
               matTooltip="Back">
               Back to Join
-            </button>
+            </button> -->
             <button mat-button matStepperNext>Next</button>
           </div>
         </form>

@@ -66,6 +66,7 @@ import { PostsComponent } from './components/widgets/posts/posts.component';
 import { ReferrerCardComponent } from './components/widgets/referrer-card/referrer-card.component';
 
 // Directives
+import { AutocompleteForceSelectionDirective } from './directives/autocomplete-force-selection/autocomplete-force-selection.directive';
 import { AutofocusDirective } from './directives/autofocus/autofocus.directive';
 
 // Ngxs states -- most entities should extend EntityState.
@@ -100,6 +101,7 @@ import { UserState } from './store/user/user.state';
     AddPhotoFormComponent,
     AdminContactComponent,
     AppComponent,
+    AutocompleteForceSelectionDirective,
     AutofocusDirective,
     ChatComponent,
     ChatFormComponent,
