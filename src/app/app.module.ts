@@ -1,7 +1,7 @@
 // System and Third-party
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { MaterialImportModule } from './imports/material';
 import { NgxsModule } from '@ngxs/store';
@@ -23,6 +23,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { NavComponent } from './components/layout/nav/nav.component';
 
 // Pages
+// About can be used as a page or widget, such as within a side nav.
+import { AboutComponent } from './components/pages/about/about.component';
 import { ChatComponent } from './components/pages/chat/chat.component';
 import { ChatsComponent } from './components/pages/chats/chats.component';
 import { DashComponent } from './components/pages/dash/dash.component';
@@ -59,9 +61,9 @@ import { TextFormComponent } from './components/forms/text-form/text-form.compon
 import { VerificationFormComponent } from './components/forms/verification-form/verification-form.component';
 
 // Widgets
-import { AboutSidenavComponent } from './components/widgets/about-sidenav/about-sidenav.component';
 import { MapComponent } from './components/widgets/map/map.component';
 import { PostsComponent } from './components/widgets/posts/posts.component';
+import { ReferrerCardComponent } from './components/widgets/referrer-card/referrer-card.component';
 
 // Directives
 import { AutofocusDirective } from './directives/autofocus/autofocus.directive';
@@ -94,7 +96,7 @@ import { UserState } from './store/user/user.state';
   // Components (a type of directive), Directives, and Pipes are declared
   // Let's keep these alphabetical so they're easier to find.
   declarations: [
-    AboutSidenavComponent,
+    AboutComponent,
     AddPhotoFormComponent,
     AdminContactComponent,
     AppComponent,
@@ -123,6 +125,7 @@ import { UserState } from './store/user/user.state';
     PostsComponent,
     PostFormComponent,
     QuestionsFormComponent,
+    ReferrerCardComponent,
     RegistrationComponent,
     TaskComponent,
     TaskFormComponent,
@@ -141,6 +144,7 @@ import { UserState } from './store/user/user.state';
     // modules can import CommonModule, a subset of this.
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
 
     // Material Design Components
