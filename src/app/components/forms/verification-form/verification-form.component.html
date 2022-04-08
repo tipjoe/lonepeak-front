@@ -1,1 +1,23 @@
-<p>verification-form works!</p>
+<form *ngIf="verificationState === 0" [formGroup]="mobileFormGroup" (ngSubmit)="submitMobile()">
+  <p>Can we use your number to call or text you with neighborhood info?</p>
+  <mat-form-field appearance="fill" class="block">
+    <mat-label>Mobile Number</mat-label>
+    <input type="text" matInput formControlName="mobile" required>
+  </mat-form-field>
+  <button type="submit" mat-raised-button color="accent" aria-label="Submit">Yes, you can contact me</button>
+</form>
+<form *ngIf="verificationState === 1" [formGroup]="verificationFormGroup" (ngSubmit)="submitKey()">
+  <p>We just texted you a verification code at {{mobileFormGroup.value.mobile}} to be sure we have your correct number.
+  </p>
+  <mat-form-field appearance="fill">
+    <mat-label>Enter code to verify phone</mat-label>
+    <input type="text" matInput formControlName="key" required>
+  </mat-form-field>
+  <button type="button" mat-button (click)="stateReset()">Back</button>
+  <button type="submit" mat-raised-button color="accent" aria-label="Submit">Verify</button>
+</form>
+<div *ngIf="verificationState === 2">
+  <img src="assets/images/le-poo.svg" alt="GAC Poop" class="w-6/12 mx-auto">
+  <h1 class="text-center mt-2">Congrats [Mindy]!</h1>
+  <button mat-raised-button color="accent" [routerLink]="['/home']">Enter Neighborhood Site</button>
+</div>

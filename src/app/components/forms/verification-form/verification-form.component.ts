@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-verification-form',
@@ -6,7 +7,32 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./verification-form.component.sass'],
 })
 export class VerificationFormComponent implements OnInit {
-  constructor() {}
+  verificationState: number = 2;
+  mobileFormGroup: FormGroup;
+  verificationFormGroup: FormGroup;
 
-  ngOnInit(): void {}
+  constructor(private _formBuilder: FormBuilder) {}
+
+  ngOnInit(): void {
+    this.mobileFormGroup = this._formBuilder.group({
+      mobile: ['', Validators.required],
+    });
+    this.verificationFormGroup = this._formBuilder.group({
+      key: ['', Validators.required],
+    });
+  }
+
+  submitMobile() {
+    this.verificationState = 1;
+    console.log(this.mobileFormGroup);
+  }
+
+  submitKey() {
+    this.verificationState = 2;
+    console.log(this.verificationFormGroup);
+  }
+
+  stateReset() {
+    this.verificationState = 0;
+  }
 }
