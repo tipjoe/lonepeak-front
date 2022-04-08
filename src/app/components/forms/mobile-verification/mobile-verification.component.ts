@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-verification-form',
-  templateUrl: './verification-form.component.html',
-  styleUrls: ['./verification-form.component.sass'],
+  selector: 'app-mobile-verification',
+  templateUrl: './mobile-verification.component.html',
+  styleUrls: ['./mobile-verification.component.sass'],
 })
-export class VerificationFormComponent implements OnInit {
+export class MobileVerificationComponent implements OnInit {
   verificationState: number = 0;
   mobileFormGroup: FormGroup;
   verificationFormGroup: FormGroup;

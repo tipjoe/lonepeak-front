@@ -7,13 +7,14 @@
   <button type="submit" mat-raised-button color="accent" aria-label="Submit">Yes, you can contact me</button>
 </form>
 <form *ngIf="verificationState === 1" [formGroup]="verificationFormGroup" (ngSubmit)="submitKey()">
-  <p>We just texted you a verification code at {{mobileFormGroup.value.mobile}} to be sure we have your correct number.
+  <p>We just texted you a verification code at <strong>{{mobileFormGroup.value.mobile}}</strong> to be sure we have your
+    correct number.
   </p>
   <mat-form-field appearance="fill">
     <mat-label>Enter code to verify phone</mat-label>
     <input type="text" matInput formControlName="key" required>
   </mat-form-field>
-  <button type="button" mat-button (click)="stateReset()">Back</button>
+  <button type="button" mat-raised-button (click)="stateReset()">Back</button>
   <button type="submit" mat-raised-button color="accent" aria-label="Submit">Verify</button>
 </form>
 <div *ngIf="verificationState === 2">
