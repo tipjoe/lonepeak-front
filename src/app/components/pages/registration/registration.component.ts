@@ -22,7 +22,7 @@ export class RegistrationComponent implements OnInit {
   // Phone and verification
   step2FormGroup: FormGroup
 
-  address:FormControl = new FormControl('', Validators.required, );
+  // address:FormControl = new FormControl();
 
   // These come from our location service.
   // For now, hard-coded.
@@ -43,13 +43,13 @@ export class RegistrationComponent implements OnInit {
     this.step1FormGroup = this._formBuilder.group({
       first: ['', Validators.required],
       last: ['', Validators.required],
-      address: [null, Validators.required, ],
+      address: ['', Validators.required],
     })
     this.step2FormGroup = this._formBuilder.group({
       mobile: ['', Validators.required],
     })
 
-    this.filteredAddressOptions$ = this.address.valueChanges.pipe(
+    this.filteredAddressOptions$ = this.step1FormGroup.controls['address'].valueChanges.pipe(
       startWith(''),
       map(value => (typeof value === 'string' ? value: value.value)),
       map(name => (name ? this._filterAddress(name) : this.addressOptions.slice())),
@@ -68,7 +68,6 @@ export class RegistrationComponent implements OnInit {
 
   // Filter the address for autocomplete.
   private _filterAddress(address:string): Address[] {
-    console.log('address', address)
     const filterValue = address.toLowerCase();
     return this.addressOptions.filter(option => option.value.toLowerCase().includes(filterValue));
   }

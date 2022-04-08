@@ -30,6 +30,12 @@
   <!-- Join/registration form -->
   <div *ngIf="currentState === 1" [class]="{ 'fade-in': currentState === 1 }" class="-ml-8">
 
+    <div class="flex mb-4 justify-end">
+      <button mat-raised-button (click)="join()" aria-label="Back" matTooltip="Back">
+        Back to Join
+      </button>
+    </div>
+
     <mat-stepper orientation="vertical" linear="true" #stepper>
       <ng-template matStepperIcon="edit">
         <mat-icon>check</mat-icon>
@@ -38,43 +44,39 @@
         <form [formGroup]="step1FormGroup">
           <ng-template matStepLabel>Hi, what's your name?</ng-template>
 
-          <mat-form-field appearance="fill" class="mt-4">
-            <mat-label>First</mat-label>
-            <input matInput placeholder="First name" formControlName="first" required>
-          </mat-form-field>
+          <div class="mt-3 flex justify-between">
+            <mat-form-field appearance="fill" class="two-inputs">
+              <mat-label>First</mat-label>
+              <input matInput placeholder="First name" formControlName="first" required>
+            </mat-form-field>
 
-          <mat-form-field appearance="fill">
-            <mat-label>Last</mat-label>
-            <input matInput placeholder="Last name" formControlName="last" required>
-          </mat-form-field>
+            <mat-form-field appearance="fill" class="two-inputs">
+              <mat-label>Last</mat-label>
+              <input matInput placeholder="Last name" formControlName="last" required>
+            </mat-form-field>
+          </div>
 
-          <mat-form-field appearance="fill">
+          <mat-form-field appearance="fill" class="block mb-6">
             <mat-label>Address</mat-label>
             <input type="text"
-              placeholder="Enter your address"
+              placeholder="Enter/select your address"
               aria-label="Address"
               matInput
-              [formControl]="address"
-              [matAutocomplete]="auto"
+              appAutocompleteForceSelection
+              formControlName="address"
+              [matAutocomplete]="autoAddress"
               required
             >
-            <mat-autocomplete #auto="matAutocomplete">
+            <mat-autocomplete autoActiveFirstOption #autoAddress="matAutocomplete">
               <mat-option *ngFor="let option of filteredAddressOptions$ | async" [value]="option.value">
                 {{ option.value }}
               </mat-option>
             </mat-autocomplete>
+            <mat-hint>You must live here to join.</mat-hint>
           </mat-form-field>
 
-          <!-- <mat-form-field appearance="fill">
-            <mat-label>Address</mat-label>
-            <input matInput placeholder="Address" formControlName="address" required>
-          </mat-form-field> -->
-
           <div>
-            <button mat-raised-button (click)="join()" aria-label="Back" matTooltip="Back">
-              Back to Join
-            </button> -->
-            <button mat-button matStepperNext>Next</button>
+            <button mat-raised-button matStepperNext>Next</button>
           </div>
         </form>
       </mat-step>
@@ -82,7 +84,7 @@
         <form [formGroup]="step2FormGroup">
           <ng-template matStepLabel>How can we reach you?</ng-template>
 
-          <mat-form-field appearance="fill" class="mt-4">
+          <mat-form-field appearance="fill" class="mt-3">
             <mat-label>Mobile</mat-label>
             <input matInput placeholder="Mobile number" formControlName="mobile" required>
           </mat-form-field>
@@ -113,7 +115,7 @@
 
     <!-- Plug this within a side nav. -->
     <div class="my-8">
-      <!-- <app-about></app-about> -->
+      <app-about></app-about>
     </div>
 
     <button mat-raised-button (click)="learnMore()" aria-label="Back" matTooltip="Back">
@@ -122,6 +124,6 @@
   </div>
 
   <div class="my-8">
-    <!-- <app-referrer-card></app-referrer-card> -->
+    <app-referrer-card></app-referrer-card>
   </div>
 </div>
