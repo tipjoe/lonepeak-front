@@ -20,7 +20,7 @@ export class NavComponent implements OnInit {
 
     // Responsively determine long or short group name.
     bpo
-      .observe(['(min-width: 600px'])
+      .observe(['min-width: 600px'])
       .subscribe((state: BreakpointState) => {
         if (state.matches) {
           this.isPhone= false;
