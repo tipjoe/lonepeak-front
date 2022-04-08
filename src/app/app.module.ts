@@ -24,7 +24,7 @@ import { NavComponent } from './components/layout/nav/nav.component';
 
 // Pages
 // About can be used as a page or widget, such as within a side nav.
-// import { AboutComponent } from './components/pages/about/about.component';`
+import { AboutComponent } from './components/pages/about/about.component';
 import { ChatComponent } from './components/pages/chat/chat.component';
 import { ChatsComponent } from './components/pages/chats/chats.component';
 import { DashComponent } from './components/pages/dash/dash.component';
@@ -63,9 +63,10 @@ import { VerificationFormComponent } from './components/forms/verification-form/
 // Widgets
 import { MapComponent } from './components/widgets/map/map.component';
 import { PostsComponent } from './components/widgets/posts/posts.component';
-// import { ReferrerCardComponent } from './components/widgets/referrer-card/referrer-card.component';
+import { ReferrerCardComponent } from './components/widgets/referrer-card/referrer-card.component';
 
 // Directives
+import { AutocompleteForceSelectionDirective } from './directives/autocomplete-force-selection/autocomplete-force-selection.directive';
 import { AutofocusDirective } from './directives/autofocus/autofocus.directive';
 
 // Ngxs states -- most entities should extend EntityState.
@@ -96,10 +97,11 @@ import { UserState } from './store/user/user.state';
   // Components (a type of directive), Directives, and Pipes are declared
   // Let's keep these alphabetical so they're easier to find.
   declarations: [
-    // AboutComponent,
+    AboutComponent,
     AddPhotoFormComponent,
     AdminContactComponent,
     AppComponent,
+    AutocompleteForceSelectionDirective,
     AutofocusDirective,
     ChatComponent,
     ChatFormComponent,
@@ -125,7 +127,7 @@ import { UserState } from './store/user/user.state';
     PostsComponent,
     PostFormComponent,
     QuestionsFormComponent,
-    // ReferrerCardComponent,
+    ReferrerCardComponent,
     RegistrationComponent,
     TaskComponent,
     TaskFormComponent,

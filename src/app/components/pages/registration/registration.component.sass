@@ -7,3 +7,22 @@
     opacity:0
   100%
     opacity:1
+
+// Override default mat-stepper styles.
+::ng-deep
+  .mat-stepper-vertical
+    .mat-step-header .mat-step-icon-selected,
+    .mat-step-header .mat-step-icon-state-done,
+    .mat-step-header .mat-step-icon-state-edit
+      background-color: #388e3c !important
+
+    .mat-vertical-content
+      padding: .2rem 1.5rem !important
+
+  // Don't add left pad to input hints (subscript text below field).
+  .mat-form-field-appearance-fill .mat-form-field-subscript-wrapper
+    padding: 0 !important
+
+// Allow two fields on same row to fill most of horizontal space.
+.two-inputs
+  width: 48%

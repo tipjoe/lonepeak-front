@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Observable, of } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import { LocationStreet as Address } from 'src/app/interfaces/location-street';
 
 @Component({
   selector: 'app-registration',
@@ -19,6 +22,19 @@ export class RegistrationComponent implements OnInit {
   // Phone and verification
   step2FormGroup: FormGroup
 
+  // address:FormControl = new FormControl();
+
+  // These come from our location service.
+  // For now, hard-coded.
+  addressOptions: Address[] = [
+    { id: 1, value: '123 address 1' },
+    { id: 2, value: '242 address 2' },
+    { id: 3, value: '999 address 3' },
+    { id: 4, value: '799 address 4' },
+    { id: 5, value: '663 address 5' },
+  ]
+  filteredAddressOptions$: Observable<Address[]>
+
   constructor(
     private _formBuilder: FormBuilder
   ) { }
@@ -32,6 +48,12 @@ export class RegistrationComponent implements OnInit {
     this.step2FormGroup = this._formBuilder.group({
       mobile: ['', Validators.required],
     })
+
+    this.filteredAddressOptions$ = this.step1FormGroup.controls['address'].valueChanges.pipe(
+      startWith(''),
+      map(value => (typeof value === 'string' ? value: value.value)),
+      map(name => (name ? this._filterAddress(name) : this.addressOptions.slice())),
+    );
   }
 
   // Toggle the join registration form.
@@ -42,5 +64,11 @@ export class RegistrationComponent implements OnInit {
   // Toggle learn more side nav.
   learnMore() {
     this.currentState = this.currentState !== 2 ? 2 : 0
+  }
+
+  // Filter the address for autocomplete.
+  private _filterAddress(address:string): Address[] {
+    const filterValue = address.toLowerCase();
+    return this.addressOptions.filter(option => option.value.toLowerCase().includes(filterValue));
   }
 }
