@@ -7,7 +7,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./verification-form.component.sass'],
 })
 export class VerificationFormComponent implements OnInit {
-  verificationState: number = 2;
+  verificationState: number = 0;
   mobileFormGroup: FormGroup;
   verificationFormGroup: FormGroup;
 
