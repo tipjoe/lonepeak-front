@@ -7,6 +7,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./mobile-verification.component.sass'],
 })
 export class MobileVerificationComponent implements OnInit {
+  // State for displayed forms max of 3 states (0-2)
   verificationState: number = 0;
   mobileFormGroup: FormGroup;
   verificationFormGroup: FormGroup;
@@ -22,16 +23,19 @@ export class MobileVerificationComponent implements OnInit {
     });
   }
 
+  // Captures mobile number from form submit
   submitMobile() {
     this.verificationState = 1;
     console.log(this.mobileFormGroup);
   }
 
+  // Authentication for mobile verification key
   submitKey() {
     this.verificationState = 2;
     console.log(this.verificationFormGroup);
   }
 
+  // Returns to entering mobile number state
   stateReset() {
     this.verificationState = 0;
   }

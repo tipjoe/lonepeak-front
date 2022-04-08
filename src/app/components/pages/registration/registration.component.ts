@@ -19,8 +19,6 @@ export class RegistrationComponent implements OnInit {
 
   // Name and address.
   step1FormGroup: FormGroup
-  // Phone and verification
-  step2FormGroup: FormGroup
 
   // address:FormControl = new FormControl();
 
@@ -44,9 +42,6 @@ export class RegistrationComponent implements OnInit {
       first: ['', Validators.required],
       last: ['', Validators.required],
       address: ['', Validators.required],
-    })
-    this.step2FormGroup = this._formBuilder.group({
-      mobile: ['', Validators.required],
     })
 
     this.filteredAddressOptions$ = this.step1FormGroup.controls['address'].valueChanges.pipe(
