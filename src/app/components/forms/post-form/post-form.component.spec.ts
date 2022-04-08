@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NgxImageCompressService } from 'ngx-image-compress';
+// import { NgxImageCompressService } from 'ngx-image-compress';
 
 import { PostFormComponent } from './post-form.component';
 
@@ -14,7 +14,7 @@ describe('PostFormComponent', () => {
       declarations: [ PostFormComponent ],
       // providers: [] for services.
       providers: [
-        NgxImageCompressService
+        // NgxImageCompressService
       ]
     })
     .compileComponents();
