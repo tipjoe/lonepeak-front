@@ -86,7 +86,7 @@ import { RoadState } from './store/road/road.state';
 import { UserState } from './store/user/user.state';
 
 // Ngx-Mask Config
-export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
+// export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
 // Internal Services
 // App-based services are made available globally with the

@@ -74,8 +74,9 @@
         </form>
       </mat-step>
       <mat-step [stepControl]="step2FormGroup">
+        <ng-template matStepLabel>How can we reach you?</ng-template>
         <app-mobile-verification></app-mobile-verification>
-        <button mat-button matStepperPrevious>Back</button>
+        <button mat-raised-button matStepperPrevious>Back</button>
       </mat-step>
     </mat-stepper>
 
