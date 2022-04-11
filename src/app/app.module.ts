@@ -8,6 +8,7 @@ import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { environment } from '../environments/environment';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NgxMaskModule, IConfig } from 'ngx-mask';
 
 import { ServiceWorkerModule } from '@angular/service-worker';
 // import { NgxImageCompressService } from 'ngx-image-compress';
@@ -84,6 +85,9 @@ import { PostState } from './store/post/post.state';
 import { RoadState } from './store/road/road.state';
 import { UserState } from './store/user/user.state';
 
+// Ngx-Mask Config
+export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
+
 // Internal Services
 // App-based services are made available globally with the
 // @Injectable({providedIn: root}) decorator. See `providers` below for more.
@@ -151,6 +155,8 @@ import { UserState } from './store/user/user.state';
     // Material Design Components
     MaterialImportModule,
 
+    // ngx-mask
+    NgxMaskModule.forRoot(),
     // Ngxs Store
     // `forRoot
     // See https://angular.io/guide/singleton-services#the-forroot-pattern
