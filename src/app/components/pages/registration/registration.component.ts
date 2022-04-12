@@ -20,6 +20,7 @@ export class RegistrationComponent implements OnInit {
   // 1 - join stepper
   // 2 - learn more side nav
   currentState: number = 0;
+  mobileCompState: number;
 
   // Name and address.
   step1FormGroup: FormGroup;
@@ -67,6 +68,12 @@ export class RegistrationComponent implements OnInit {
   learnMore() {
     this.currentState = this.currentState !== 2 ? 2 : 0;
   }
+
+  // Handler for capturing and updating the Mobile Verification Component
+  mobileCompStateHandler(value: number) {
+    this.mobileCompState = value;
+    console.log(this.mobileCompState)
+  };
 
   // Filter the address for autocomplete.
   private _filterAddress(address: string): Address[] {
