@@ -72,8 +72,7 @@ export class RegistrationComponent implements OnInit {
   // Handler for capturing and updating the Mobile Verification Component
   mobileCompStateHandler(value: number) {
     this.mobileCompState = value;
-    console.log(this.mobileCompState)
-  };
+  }
 
   // Filter the address for autocomplete.
   private _filterAddress(address: string): Address[] {

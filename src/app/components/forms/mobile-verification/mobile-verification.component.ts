@@ -36,7 +36,6 @@ export class MobileVerificationComponent implements OnInit {
     if (this.mobileFormGroup.value.mobile.length === 10) {
       this.verificationState = this.verificationState !== 1 ? 1 : 0;
       this.updateVerificationStateEvent(this.verificationState);
-      console.log(this.mobileFormGroup);
     }
   }
 
@@ -45,7 +44,6 @@ export class MobileVerificationComponent implements OnInit {
     if (this.verificationFormGroup.value.key) {
       this.verificationState = this.verificationState !== 2 ? 2 : 1;
       this.updateVerificationStateEvent(this.verificationState);
-      console.log(this.verificationFormGroup);
     }
   }
 
