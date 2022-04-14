@@ -17,13 +17,13 @@
     <mat-label>Enter code to verify phone</mat-label>
     <input type="text" matInput formControlName="key" required>
   </mat-form-field>
-  <button type="submit" mat-raised-button color="accent" aria-label="Submit"
-    class="w-full sm:w-auto mb-4">Verify</button>
+  <button type="submit" mat-raised-button color="accent" aria-label="Submit" class=" block w-full sm:w-auto mb-4">Verify
+    Phone Number</button>
   <button type="button" mat-raised-button aria-label="Back" (click)="stateReset()">Back</button>
 </form>
-<div *ngIf="verificationState === 2">
+<div *ngIf="verificationState === 2" class="text-center">
   <img src="assets/images/le-poo.svg" alt="GAC Poop" class="w-6/12 mx-auto">
   <h1 class="text-center mt-2">Congrats [Mindy]!</h1>
-  <button mat-raised-button color="accent" [routerLink]="['/home']" class="w-full sm:w-auto">Enter Neighborhood
+  <button mat-raised-button color="accent" [routerLink]="['/home']" class="w-full sm:w-auto mx-auto">Enter Neighborhood
     Site</button>
 </div>
