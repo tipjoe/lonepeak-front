@@ -58,15 +58,8 @@
 
           <mat-form-field appearance="fill" class="block mb-6">
             <mat-label>Address</mat-label>
-            <input type="text"
-              placeholder="Enter/select your address"
-              aria-label="Address"
-              matInput
-              appAutocompleteForceSelection
-              formControlName="address"
-              [matAutocomplete]="autoAddress"
-              required
-            >
+            <input type="text" placeholder="Enter/select your address" aria-label="Address" matInput
+              appAutocompleteForceSelection formControlName="address" [matAutocomplete]="autoAddress" required>
             <mat-autocomplete autoActiveFirstOption #autoAddress="matAutocomplete">
               <mat-option *ngFor="let option of filteredAddressOptions$ | async" [value]="option.value">
                 {{ option.value }}
@@ -81,26 +74,9 @@
         </form>
       </mat-step>
       <mat-step [stepControl]="step2FormGroup">
-        <form [formGroup]="step2FormGroup">
-          <ng-template matStepLabel>How can we reach you?</ng-template>
-
-          <mat-form-field appearance="fill" class="mt-3">
-            <mat-label>Mobile</mat-label>
-            <input matInput placeholder="Mobile number" formControlName="mobile" required>
-          </mat-form-field>
-
-          <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button matStepperNext>Next</button>
-          </div>
-        </form>
-      </mat-step>
-      <mat-step>
-        <ng-template matStepLabel>Done</ng-template>
-        <p>Welcome [Jake]!</p>
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-        </div>
+        <ng-template matStepLabel>How can we reach you?</ng-template>
+        <app-mobile-verification (verificationStateEvent)="mobileCompStateHandler($event)"></app-mobile-verification>
+        <button mat-raised-button *ngIf="mobileCompState === 0" matStepperPrevious>Back</button>
       </mat-step>
     </mat-stepper>
 

@@ -8,7 +8,7 @@ import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { environment } from '../environments/environment';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-
+import { NgxMaskModule, IConfig } from 'ngx-mask';
 
 import { ServiceWorkerModule } from '@angular/service-worker';
 // import { NgxImageCompressService } from 'ngx-image-compress';
@@ -58,7 +58,7 @@ import { PostFormComponent } from './components/forms/post-form/post-form.compon
 import { QuestionsFormComponent } from './components/forms/questions-form/questions-form.component';
 import { TaskFormComponent } from './components/forms/task-form/task-form.component';
 import { TextFormComponent } from './components/forms/text-form/text-form.component';
-import { VerificationFormComponent } from './components/forms/verification-form/verification-form.component';
+import { MobileVerificationComponent } from './components/forms/mobile-verification/mobile-verification.component';
 
 // Widgets
 import { MapComponent } from './components/widgets/map/map.component';
@@ -134,7 +134,7 @@ import { UserState } from './store/user/user.state';
     TasksComponent,
     TextFormComponent,
     UserComponent,
-    VerificationFormComponent,
+    MobileVerificationComponent,
   ],
 
   // Modules are imported
@@ -152,6 +152,8 @@ import { UserState } from './store/user/user.state';
     // Material Design Components
     MaterialImportModule,
 
+    // ngx-mask
+    NgxMaskModule.forRoot(),
     // Ngxs Store
     // `forRoot
     // See https://angular.io/guide/singleton-services#the-forroot-pattern
