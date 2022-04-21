@@ -2,7 +2,7 @@
   <p>Can we use your number to call or text you with neighborhood info?</p>
   <mat-form-field appearance="fill" class="block">
     <mat-label>Mobile Number</mat-label>
-    <input type="text" matInput formControlName="mobile" mask="000-000-0000" required>
+    <input type="text" matInput formControlName="mobile" id="mobile" mask="000-000-0000" required>
   </mat-form-field>
   <button type="submit" mat-raised-button color="accent" aria-label="Submit" class="w-full sm:w-auto mb-4">
     Yes, you can contact me
@@ -15,7 +15,7 @@
   </p>
   <mat-form-field appearance="fill" class="block">
     <mat-label>Enter code to verify phone</mat-label>
-    <input type="text" matInput formControlName="key" required>
+    <input type="text" matInput formControlName="key" id="key" required>
   </mat-form-field>
   <button type="submit" mat-raised-button color="accent" aria-label="Submit" class=" block w-full sm:w-auto mb-4">
     Verify Phone Number
