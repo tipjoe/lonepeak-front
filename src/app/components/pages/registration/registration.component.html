@@ -75,8 +75,9 @@
       </mat-step>
       <mat-step [stepControl]="step2FormGroup">
         <ng-template matStepLabel>How can we reach you?</ng-template>
-        <app-mobile-verification (verificationStateEvent)="mobileCompStateHandler($event)"></app-mobile-verification>
-        <button mat-raised-button *ngIf="mobileCompState === 0" matStepperPrevious>Back</button>
+        <app-mobile-verification (verificationStateEvent)="mobileVerificationComponentStateHandler($event)">
+        </app-mobile-verification>
+        <button mat-raised-button *ngIf="mobileVerificationComponentState === 0" matStepperPrevious>Back</button>
       </mat-step>
     </mat-stepper>
 

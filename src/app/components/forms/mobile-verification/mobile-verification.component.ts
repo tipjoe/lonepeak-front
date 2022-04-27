@@ -24,6 +24,7 @@ export class MobileVerificationComponent implements OnInit {
     this.verificationFormGroup = this._formBuilder.group({
       key: ['', Validators.required],
     });
+    console.log(this.mobileFormGroup);
   }
 
   // Updates verificationStateEvent to the passed through number
@@ -41,7 +42,7 @@ export class MobileVerificationComponent implements OnInit {
 
   // Authentication for mobile verification key
   submitKey() {
-    if (this.verificationFormGroup.value.key) {
+    if (this.verificationFormGroup.value.key.length === 5) {
       this.verificationState = this.verificationState !== 2 ? 2 : 1;
       this.updateVerificationStateEvent(this.verificationState);
     }
