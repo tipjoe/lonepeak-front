@@ -8,9 +8,8 @@ describe('RegistrationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RegistrationComponent ]
-    })
-    .compileComponents();
+      declarations: [RegistrationComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -21,5 +20,23 @@ describe('RegistrationComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should continue to next state if all inputs are provided in step1Form', () => {
+    // Arrange
+    // Act
+    // Assert
+  });
+
+  it("shouldn't continue if no inputs are provided in step1Form", () => {
+    // Arrange
+    // Act
+    // Assert
+  });
+
+  it('should update mobileVerificationComponentState when mobileVerificationComponentStateHandler is called', () => {
+    // Arrange
+    // Act
+    // Assert
   });
 });
