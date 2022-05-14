@@ -50,7 +50,7 @@ const routes: Routes = [
   // { path: 'add-post', component: PostFormComponent },
   { path: 'task', component: TaskComponent },
   { path: 'tasks', component: TasksComponent },
-  { path: 'user', component: UserComponent },
+  { path: 'me', component: UserComponent },
   { path: 'contact', component: AdminContactComponent },
   { path: 'join', component: RegistrationComponent },
 ];

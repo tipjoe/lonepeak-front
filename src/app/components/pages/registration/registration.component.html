@@ -1,40 +1,49 @@
-<header class="-mt-20">
-  <div id="big-logo" class="sm:text-center">
-    <img src="assets/images/lppn-logo-gac.gif" class="sm:inline relative -left-6 sm:left-0" style="max-width: none">
-  </div>
+<header>
+  <img src="/assets/images/lppn-logo.png" class="m-auto">
 </header>
 <div class="my-6 fade-in">
-  <div *ngIf="currentState === 0" [class]="{ 'fade-in': currentState === 0 }">
-    <p>
-      <strong>Joe Tippetts</strong>
-      gives a crap about you and invited you to our group!
+  <div *ngIf="currentState === 0" class="text-center"
+    [class]="{ 'fade-in': currentState === 0 }">
+    <p class="mb-6">
+      Welcome to Lone Peak Park Neighbors!
     </p>
-    <p>
-      Giving a crap for each other makes our neighborhood more friendly, inclusive,
-      beautiful, and safe.
-    </p>
-    <div class="text-center mt-8 mb-5">
-      <button mat-raised-button color="primary" (click)="learnMore()" class="w-full sm:w-auto" aria-label="Learn more"
+      <button mat-raised-button color="primary" (click)="learnMore()"
+        class="mb-4 mr-4" aria-label="Learn more"
         matTooltip="Learn more">
         Learn More
       </button>
-    </div>
-    <div class="text-center mt-5 mb-8">
-      <button mat-raised-button color="accent" (click)="join()" class="w-full sm:w-auto" aria-label="Join"
+      <button mat-raised-button color="accent" (click)="join()"
+        aria-label="Join"
         matTooltip="Join">
-        Join the Neighborhood Group!
+        Join
       </button>
+  </div>
+
+  <!-- Learn More -->
+  <div *ngIf="currentState === 2">
+    <button mat-button color="primary"
+      (click)="learnMore()" aria-label="Back" matTooltip="Back">
+      Back to Join
+    </button>
+
+    <div class="my-4">
+      <app-about></app-about>
     </div>
+
+    <button mat-button color="primary"
+      (click)="learnMore()" aria-label="Back" matTooltip="Back">
+      Back to Join
+    </button>
   </div>
 
   <!-- Join/registration form -->
-  <div *ngIf="currentState === 1" [class]="{ 'fade-in': currentState === 1 }" class="-ml-8">
+  <div *ngIf="currentState === 1" [class]="{ 'fade-in': currentState === 1 }">
 
-    <div class="flex mb-4 justify-end">
-      <button mat-raised-button (click)="join()" aria-label="Back" matTooltip="Back">
-        Back to Join
-      </button>
-    </div>
+    <button mat-button color="primary"
+      *ngIf="mobileCompState !== 2"
+      (click)="join()" aria-label="Back" matTooltip="Back">
+      Back
+    </button>
 
     <mat-stepper orientation="vertical" linear="true" #stepper>
       <ng-template matStepperIcon="edit">
@@ -56,7 +65,7 @@
             </mat-form-field>
           </div>
 
-          <mat-form-field appearance="fill" class="block mb-6">
+          <mat-form-field appearance="fill" class="block">
             <mat-label>Address</mat-label>
             <input type="text" placeholder="Enter/select your address" aria-label="Address" matInput
               appAutocompleteForceSelection formControlName="address" [matAutocomplete]="autoAddress" required>
@@ -68,38 +77,33 @@
             <mat-hint>You must live here to join.</mat-hint>
           </mat-form-field>
 
-          <div>
-            <button mat-raised-button matStepperNext>Next</button>
+          <div class="mt-6">
+            <button mat-raised-button matStepperNext
+              [disabled]="step1FormGroup.controls.address.invalid">
+              Next
+            </button>
           </div>
         </form>
       </mat-step>
       <mat-step [stepControl]="step2FormGroup">
         <ng-template matStepLabel>How can we reach you?</ng-template>
         <app-mobile-verification (verificationStateEvent)="mobileCompStateHandler($event)"></app-mobile-verification>
-        <button mat-raised-button *ngIf="mobileCompState === 0" matStepperPrevious>Back</button>
+
+        <button mat-raised-button
+          *ngIf="mobileCompState !== 1"
+          class="mt-6"
+          matStepperPrevious>
+          Back
+        </button>
       </mat-step>
     </mat-stepper>
 
-    <!-- <app-name-address-form></app-name-address-form>
-    <app-verification-form></app-verification-form> -->
   </div>
 
-  <div *ngIf="currentState === 2" [class]="{ 'fade-in': currentState === 2 }">
-    <button mat-raised-button (click)="learnMore()" aria-label="Back" matTooltip="Back">
-      Back to Join
-    </button>
 
-    <!-- Plug this within a side nav. -->
-    <div class="my-8">
-      <app-about></app-about>
-    </div>
+  <div class="my-8" *ngIf="currentState === 0">
+    <img src="/assets/images/map.jpg" class="m-auto">
 
-    <button mat-raised-button (click)="learnMore()" aria-label="Back" matTooltip="Back">
-      Back to Join
-    </button>
-  </div>
-
-  <div class="my-8">
-    <app-referrer-card></app-referrer-card>
+    <!-- <app-referrer-card></app-referrer-card> -->
   </div>
 </div>

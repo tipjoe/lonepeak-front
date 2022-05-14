@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
-  FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { LocationStreet as Address } from 'src/app/interfaces/location-street';
 
@@ -26,8 +25,6 @@ export class RegistrationComponent implements OnInit {
   step1FormGroup: FormGroup;
   step2FormGroup: FormGroup;
 
-  // address:FormControl = new FormControl();
-
   // These come from our location service.
   // For now, hard-coded.
   addressOptions: Address[] = [
@@ -43,18 +40,18 @@ export class RegistrationComponent implements OnInit {
 
   ngOnInit(): void {
     this.step1FormGroup = this._formBuilder.group({
-      first: ['', Validators.required],
-      last: ['', Validators.required],
-      address: ['', Validators.required],
-    });
+        first: ['', Validators.required],
+        last: ['', Validators.required],
+        address: ['', Validators.required],
+      },
+    );
 
-    this.filteredAddressOptions$ = this.step1FormGroup.controls[
-      'address'
-    ].valueChanges.pipe(
-      startWith(''),
-      map((value) => (typeof value === 'string' ? value : value.value)),
-      map((name) =>
-        name ? this._filterAddress(name) : this.addressOptions.slice()
+    this.filteredAddressOptions$ = this.step1FormGroup.controls['address']
+      .valueChanges.pipe(
+        startWith(''),
+        map((value) => (value.value)),
+        map((name) =>
+          name ? this._filterAddress(name) : this.addressOptions.slice()
       )
     );
   }

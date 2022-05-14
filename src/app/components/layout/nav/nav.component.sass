@@ -1,6 +1,5 @@
-.gac-bg
-  background-color: #66bb6a
-
+// .gac-bg
+//   background-color: #66bb6a
 
 .spacer
   flex: 1 1 auto
@@ -12,20 +11,31 @@
   position: relative
   top: 4px
 
+#topnav, #bottomnav
+  padding: 0 1.5rem
+  position: fixed
+  z-index: 999
+
 #topnav
+  top: 0
   button
     margin-left: 1.5rem
     &.menu
       margin-left: 1rem
 
 #bottomnav
-  position: fixed
   bottom: 0
-  z-index: 999
 
 #breadcrumb
   padding-top: .4em
   padding-bottom: .4em
+
+mat-icon
+   transform: scale(1.25)
+
+button.mat-icon-button span.label
+  display: inline-block
+  padding-left: .5rem
 
 // #right-drawer
 //   // Let the sidenav fill the entire height (mobile-first).
@@ -38,11 +48,11 @@
 //     transform: scale(.75)
 
 
-.map-poop-icon
-  font-size: 36px
+// .map-poop-icon
+//   font-size: 36px
 
-#crap-dash
+// #crap-dash
 
-  button
-    position: absolute
-    top: -1.25rem
+//   button
+//     position: absolute
+//     top: -1.25rem

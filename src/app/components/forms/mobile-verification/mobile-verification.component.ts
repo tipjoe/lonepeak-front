@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-mobile-verification',
@@ -14,7 +15,10 @@ export class MobileVerificationComponent implements OnInit {
   mobileFormGroup: FormGroup;
   verificationFormGroup: FormGroup;
 
-  constructor(private _formBuilder: FormBuilder) {}
+  constructor(
+    private _formBuilder: FormBuilder,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.verificationStateEvent.emit(this.verificationState);
@@ -41,10 +45,9 @@ export class MobileVerificationComponent implements OnInit {
 
   // Authentication for mobile verification key
   submitKey() {
-    if (this.verificationFormGroup.value.key) {
-      this.verificationState = this.verificationState !== 2 ? 2 : 1;
-      this.updateVerificationStateEvent(this.verificationState);
-    }
+    // TODO: verify code here and show spinner. If successful, redirect
+    // to welcome (new intro page) else tell user code is wrong.
+    this.router.navigate(['/home']);
   }
 
   // Returns to entering mobile number state
