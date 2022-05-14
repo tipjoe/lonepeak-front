@@ -4,17 +4,15 @@ This (`lonepeak-front`) is the angular front end repository that works together 
 (Laravel back end api).
 
 Lonepeak is micro-community software that helps neighbors meet and do stuff
-together. It's not a new "social media" like Facebook. We think "real"
-friendships with the real people that live around you are way more interesting
-than having a million "online" friends. This app helps break the ice and lead
-to real interactions.
-
-It all starts with "giving a crap" about each other. Here's a short
+together. It all starts with "giving a crap" about each other. Here's a short
 video where Grumpy Cat helps you see the idea -- https://youtu.be/4ncsM6Beb8A
 (parts are outdated).
 
 This is open source software that anyone can use freely. It's a volunteer
 passion project. When we get time, we'll create some instructions to use it.
+If your neighborhood is interested in using it but you don't have a technical
+person to help, we may be able to refer you to someone who can help for a
+fee but we don't manage it.
 
 If you've started learning software development and would like to build your
 resume by contributing to a "real" project, let's talk. Just create an
