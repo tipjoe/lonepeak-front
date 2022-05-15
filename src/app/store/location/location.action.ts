@@ -21,6 +21,11 @@ export namespace LocationActions {
     constructor() {}
   }
 
+  export class GetIndexAddresses {
+    static readonly type = '[Location] GetIndexAddresses';
+    constructor() {}
+  }
+
   export class Create {
     static readonly type = '[Location] Create';
     constructor(public entity: Location) {}

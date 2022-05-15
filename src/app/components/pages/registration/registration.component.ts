@@ -6,7 +6,11 @@ import {
 } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { LocationStreet as Address } from 'src/app/interfaces/location-street';
+
+import { Location } from 'src/app/interfaces/map/location';
+import { LocationState } from 'src/app/store/location/location.state';
+import { LocationActions as LA } from 'src/app/store/location/location.action';
+import { Store } from '@ngxs/store';
 
 @Component({
   selector: 'app-registration',
@@ -27,16 +31,19 @@ export class RegistrationComponent implements OnInit {
 
   // These come from our location service.
   // For now, hard-coded.
-  addressOptions: Address[] = [
-    { id: 1, value: '123 address 1' },
-    { id: 2, value: '242 address 2' },
-    { id: 3, value: '999 address 3' },
-    { id: 4, value: '799 address 4' },
-    { id: 5, value: '663 address 5' },
-  ];
-  filteredAddressOptions$: Observable<Address[]>;
+  addressOptions: Location[];
+  //   { id: 1, value: '123 address 1' },
+  //   { id: 2, value: '242 address 2' },
+  //   { id: 3, value: '999 address 3' },
+  //   { id: 4, value: '799 address 4' },
+  //   { id: 5, value: '663 address 5' },
+  // ];
+  filteredAddressOptions$: Observable<Location[]>;
 
-  constructor(private _formBuilder: FormBuilder) {}
+  constructor(
+    private _formBuilder: FormBuilder,
+    private store: Store,
+    ) {}
 
   ngOnInit(): void {
     this.step1FormGroup = this._formBuilder.group({
@@ -46,14 +53,21 @@ export class RegistrationComponent implements OnInit {
       },
     );
 
-    this.filteredAddressOptions$ = this.step1FormGroup.controls['address']
-      .valueChanges.pipe(
-        startWith(''),
-        map((value) => (typeof value === 'string' ? value : value.value)),
-        map((name) =>
-          name ? this._filterAddress(name) : this.addressOptions.slice()
-      )
-    );
+    // Get addresses.
+    this.store.dispatch(new LA.GetIndexAddresses())
+      .subscribe((store) => {
+        // Options from api.
+        this.addressOptions = this.store.selectSnapshot(LocationState.entities<Location>())
+        // Add them to the address autocomplete/select input.
+        this.filteredAddressOptions$ = this.step1FormGroup.controls['address']
+          .valueChanges.pipe(
+            startWith(''),
+            map((address1) => (typeof address1 === 'string' ? address1: address1.value)),
+            map((name) =>
+              name ? this._filterAddress(name) : this.addressOptions.slice()
+          )
+        );
+      });
   }
 
   // Toggle the join registration form.
@@ -72,10 +86,10 @@ export class RegistrationComponent implements OnInit {
   }
 
   // Filter the address for autocomplete.
-  private _filterAddress(address: string): Address[] {
+  private _filterAddress(address: string): Location[] {
     const filterValue = address.toLowerCase();
     return this.addressOptions.filter((option) =>
-      option.value.toLowerCase().includes(filterValue)
+      option.address1.toLowerCase().includes(filterValue)
     );
   }
 }

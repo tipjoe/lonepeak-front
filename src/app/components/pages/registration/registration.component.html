@@ -58,8 +58,8 @@
               autocomplete="off"
               required>
             <mat-autocomplete autoActiveFirstOption #autoAddress="matAutocomplete">
-              <mat-option *ngFor="let option of filteredAddressOptions$ | async" [value]="option.value">
-                {{ option.value }}
+              <mat-option *ngFor="let option of filteredAddressOptions$ | async" [value]="option.address1">
+                {{ option.address1}}
               </mat-option>
             </mat-autocomplete>
             <mat-hint>You must live here to join.</mat-hint>
