@@ -1,6 +1,6 @@
 <form *ngIf="verificationState === 0" [formGroup]="mobileFormGroup" (ngSubmit)="submitMobile()">
   <p class="mt-3">
-    We send messages to your phone. Your number is not shared with neighbors.
+    We will text you a code to verify your number.
   </p>
   <mat-form-field appearance="fill" class="block">
     <mat-label>Mobile Number</mat-label>
@@ -9,6 +9,9 @@
   <button type="submit" mat-raised-button color="accent" aria-label="Submit" class="w-full sm:w-auto">
     Yes, you can contact me
   </button>
+  <p class="mt-4 text-sm">
+    Your number is only visible to volunteer group admins.
+  </p>
 </form>
 
 <form *ngIf="verificationState === 1" [formGroup]="verificationFormGroup" (ngSubmit)="submitKey()">

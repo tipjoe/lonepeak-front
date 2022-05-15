@@ -49,7 +49,7 @@ export class RegistrationComponent implements OnInit {
     this.filteredAddressOptions$ = this.step1FormGroup.controls['address']
       .valueChanges.pipe(
         startWith(''),
-        map((value) => (value.value)),
+        map((value) => (typeof value === 'string' ? value : value.value)),
         map((name) =>
           name ? this._filterAddress(name) : this.addressOptions.slice()
       )

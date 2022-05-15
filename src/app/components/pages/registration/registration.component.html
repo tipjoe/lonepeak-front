@@ -1,49 +1,33 @@
 <header>
   <img src="/assets/images/lppn-logo.png" class="m-auto">
-</header>
-<div class="my-6 fade-in">
-  <div *ngIf="currentState === 0" class="text-center"
-    [class]="{ 'fade-in': currentState === 0 }">
-    <p class="mb-6">
-      Welcome to Lone Peak Park Neighbors!
-    </p>
-      <button mat-raised-button color="primary" (click)="learnMore()"
-        class="mb-4 mr-4" aria-label="Learn more"
-        matTooltip="Learn more">
-        Learn More
-      </button>
-      <button mat-raised-button color="accent" (click)="join()"
-        aria-label="Join"
-        matTooltip="Join">
-        Join
-      </button>
+  <div class="my-2" *ngIf="currentState === 0">
+    <app-referrer-card></app-referrer-card>
   </div>
-
-  <!-- Learn More -->
-  <div *ngIf="currentState === 2">
-    <button mat-button color="primary"
-      (click)="learnMore()" aria-label="Back" matTooltip="Back">
-      Back to Join
-    </button>
-
-    <div class="my-4">
-      <app-about></app-about>
+</header>
+<div class="my-6 mx-3 fade-in">
+  <div *ngIf="currentState === 0" [class]="{ 'fade-in': currentState === 0 }">
+    <p class="mb-6">
+      We're about making our neighborhood more friendly,
+      inclusive, beautiful, and safe for everyone here (see map below).
+    </p>
+    <p>
+      Joining lets you follow neighborhood conversations, news, and events.
+    </p>
+    <div class="text-center my-8">
+      <button mat-raised-button color="accent" (click)="join()"
+        class="join mb-4" aria-label="Join" matTooltip="Join">
+        Join the Neighborhood Group
+      </button>
     </div>
 
-    <button mat-button color="primary"
-      (click)="learnMore()" aria-label="Back" matTooltip="Back">
-      Back to Join
-    </button>
+    <div id="map" class="text-center my-6">
+      <img src='assets/images/lppn-map.jpg'>
+    </div>
   </div>
 
   <!-- Join/registration form -->
-  <div *ngIf="currentState === 1" [class]="{ 'fade-in': currentState === 1 }">
-
-    <button mat-button color="primary"
-      *ngIf="mobileCompState !== 2"
-      (click)="join()" aria-label="Back" matTooltip="Back">
-      Back
-    </button>
+  <div *ngIf="currentState === 1" class="-mt-4"
+    [class]="{ 'fade-in': currentState === 1 }">
 
     <mat-stepper orientation="vertical" linear="true" #stepper>
       <ng-template matStepperIcon="edit">
@@ -67,8 +51,12 @@
 
           <mat-form-field appearance="fill" class="block">
             <mat-label>Address</mat-label>
-            <input type="text" placeholder="Enter/select your address" aria-label="Address" matInput
-              appAutocompleteForceSelection formControlName="address" [matAutocomplete]="autoAddress" required>
+            <input type="text" placeholder="Enter/select your address"
+              aria-label="Address" matInput
+              appAutocompleteForceSelection formControlName="address"
+              [matAutocomplete]="autoAddress"
+              autocomplete="off"
+              required>
             <mat-autocomplete autoActiveFirstOption #autoAddress="matAutocomplete">
               <mat-option *ngFor="let option of filteredAddressOptions$ | async" [value]="option.value">
                 {{ option.value }}
@@ -98,12 +86,11 @@
       </mat-step>
     </mat-stepper>
 
-  </div>
+    <button mat-button color="primary"
+      *ngIf="mobileCompState !== 2"
+      (click)="join()" aria-label="Back" matTooltip="Back">
+      Back to Intro
+    </button>
 
-
-  <div class="my-8" *ngIf="currentState === 0">
-    <img src="/assets/images/map.jpg" class="m-auto">
-
-    <!-- <app-referrer-card></app-referrer-card> -->
   </div>
 </div>
