@@ -1,34 +1,14 @@
 <div>
 
   <mat-toolbar>
-    <mat-toolbar-row id="topnav" class="bg-gray-100">
+    <mat-toolbar-row id="topnav" class="bg-gray-100 h-16">
       <img id='logo' src='assets/images/lppn-logo-sm.png'
           [routerLink]="['/home']" class="cursor-pointer">
       <span *ngIf='!isPhone' class='title'>Lone Peak Park Neighbors</span>
       <span class='spacer'></span>
 
-      <!-- <button mat-icon-button class="tasks"
-        [routerLink]="['/tasks']" routerLinkActive="mat-primary"
-        (click)="testConsole('clicked tasks')"
-        aria-label="Tasks button"
-        matTooltip="Tasks">
-        <span class="material-icons-outlined"
-          matBadge="1" matBadgeColor="warn" matBadgeSize="small"
-          aria-label="Tasks icon">
-          task
-        </span>
-      </button> -->
-
-      <button mat-icon-button class="chat" (click)="testConsole('clicked chat')"
-        aria-label="Conversations button"
-        matTooltip="Conversations">
-        <mat-icon aria-hidden="false"
-          aria-label="Chat icon"
-          matBadge="2" matBadgeColor="warn" matBadgeSize="small">
-          chat_bubble_outline</mat-icon>
-      </button>
-
-      <button mat-icon-button class="notifications" (click)="testConsole('clicked notifications')"
+      <button mat-icon-button class="notifications"
+        [routerLink]="['/notifications']"
         aria-label="Notifications button"
         matTooltip="Notifications">
         <mat-icon aria-hidden="false"
@@ -37,58 +17,19 @@
           notifications_none
         </mat-icon>
       </button>
-
-
     </mat-toolbar-row>
 
-    <!-- Breadcrumbs -->
-    <!-- <mat-toolbar-row id="breadcrumb" class="bg-gray-200 text-sm font-light h-auto">
-      Breadcrumbs
-    </mat-toolbar-row> -->
-  </mat-toolbar>
-
-  <!-- <mat-sidenav-container id="right-drawer" class="with-breadcrumb" autosize>
-
-    <mat-sidenav #right_sidenav class="p-4 md:p-8 w-1/2 md:w-1/4"
-      mode="over"
-      position="end"
-      [fixedTopGap]="56"
-    >
-
-      <div class="text-right">
-        <button mat-icon-button class="close-right-drawer" (click)="right_sidenav.toggle()" aria-label="Close nav">
-          <mat-icon>close</mat-icon>
-        </button>
-      </div>
-
-      <p>Auto-resizing sidenav</p>
-    </mat-sidenav>
-
-    <mat-sidenav-content class="p-4 sm:p-8 mx-auto max-w-screen-lg">
-
-      <mat-card class="mb-3">
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-      </mat-card>
-
-      <mat-card class="mb-3">
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Ipsum has been the industry's standard dummy text.
-      </mat-card>
-    </mat-sidenav-content>
-
-  </mat-sidenav-container> -->
-
-  <mat-toolbar id="bottomnav" class="bg-gray-100">
-    <div class="flex w-full sm-w-9/12 lg:w-6/12 xl:w-4/12 mx-auto justify-between sm:justify-around">
-
-
-      <button mat-icon-button class="news"
+    <mat-toolbar-row id="bottomnav" class="bg-gray-100 h-16">
+      <div class="flex w-full sm-w-9/12 lg:w-6/12 xl:w-4/12 mx-auto justify-between sm:justify-around">
+        <button mat-icon-button class="news"
           [routerLink]="['/home']" routerLinkActive="mat-primary"
           (click)="testConsole('clicked home')"
-          aria-label="Neighbor news button"
-          matTooltip="Neighbor News">
+          aria-label="Home button"
+          matTooltip="Home">
           <mat-icon aria-hidden="false">
             home
           </mat-icon>
+          <span class="label hidden sm:inline">Home</span>
         </button>
 
         <button mat-icon-button class="events"
@@ -99,16 +40,8 @@
           <mat-icon aria-hidden="false" aria-label="Events icon">
             event
           </mat-icon>
+          <span class="label hidden sm:inline">Events</span>
         </button>
-
-        <div id="crap-dash" class="relative w-14">
-          <button mat-fab class="map gac-bg" (click)="testConsole('clicked dash')"
-            [routerLink]="['/map']" routerLinkActive="mat-accent-light"
-            aria-label="Crap Dash button"
-            matTooltip="Crap Dash">
-            <span class="map-poop-icon">💩</span>
-          </button>
-        </div>
 
         <button mat-icon-button class="groups"
           [routerLink]="['/groups']" routerLinkActive="mat-primary"
@@ -118,36 +51,21 @@
           <mat-icon aria-hidden="false" aria-label="Groups icon">
             groups
           </mat-icon>
+          <span class="label hidden sm:inline">Groups</span>
         </button>
 
-        <mat-menu #bottomMenu="matMenu">
-          <button mat-menu-item class="me"
-            [routerLink]="['/me']" routerLinkActive="mat-primary"
-            (click)="testConsole('clicked me');"
-            aria-label="Me button">
-            <mat-icon aria-hidden="false" aria-label="Profile icon">
-              person
-            </mat-icon> Me
-          </button>
-          <button mat-menu-item class="me"
-            [routerLink]="['/tasks']" routerLinkActive="mat-primary"
-            (click)="testConsole('clicked tasks')"
-            aria-label="Tasks button">
-            <mat-icon aria-hidden="false" aria-label="Task icon">
-             task
-            </mat-icon> To-do's
-          </button>
-        </mat-menu>
-
-        <button mat-icon-button  class="more"
-          [matMenuTriggerFor]="bottomMenu"
-          aria-label="More button"
-          matTooltip="More">
-          <mat-icon aria-hidden="false" aria-label="More menu">
-            more_vert
+        <button mat-icon-button class="me"
+          [routerLink]="['/me']" routerLinkActive="mat-primary"
+          (click)="testConsole('clicked me');"
+          aria-label="Me button"
+          matTooltip="Me (profile)">
+          <mat-icon aria-hidden="false" aria-label="Profile icon">
+            person
           </mat-icon>
+          <span class="label hidden sm:inline">Me</span>
         </button>
 
-    </div>
+      </div>
+    </mat-toolbar-row>
   </mat-toolbar>
 </div>

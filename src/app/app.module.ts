@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { MaterialImportModule } from './imports/material';
+// Will support Ivy in 3.8.*
 import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { environment } from '../environments/environment';
@@ -24,7 +25,6 @@ import { NavComponent } from './components/layout/nav/nav.component';
 
 // Pages
 // About can be used as a page or widget, such as within a side nav.
-import { AboutComponent } from './components/pages/about/about.component';
 import { ChatComponent } from './components/pages/chat/chat.component';
 import { ChatsComponent } from './components/pages/chats/chats.component';
 import { DashComponent } from './components/pages/dash/dash.component';
@@ -97,7 +97,6 @@ import { UserState } from './store/user/user.state';
   // Components (a type of directive), Directives, and Pipes are declared
   // Let's keep these alphabetical so they're easier to find.
   declarations: [
-    AboutComponent,
     AddPhotoFormComponent,
     AdminContactComponent,
     AppComponent,

@@ -33,7 +33,8 @@ export class EntityStateModel<T> {
 // to make entities searchable.
 export class EntityState<T extends Id> {
 
-  private expiresIn: number = (20 * 60 * 1000);
+  // Default to 20 minutes or override in child state class.
+  protected expiresIn: number = (20 * 60 * 1000);
 
   /*** SELECTORS AND STATIC METHODS ***/
   static entities<T>() {

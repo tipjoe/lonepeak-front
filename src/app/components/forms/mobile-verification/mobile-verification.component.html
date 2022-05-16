@@ -1,31 +1,42 @@
 <form *ngIf="verificationState === 0" [formGroup]="mobileFormGroup" (ngSubmit)="submitMobile()">
-  <p>Can we use your number to call or text you with neighborhood info?</p>
+  <p class="mt-3">
+    We will text you a code to verify your number.
+  </p>
   <mat-form-field appearance="fill" class="block">
     <mat-label>Mobile Number</mat-label>
     <input type="text" matInput formControlName="mobile" id="mobile" mask="000-000-0000" required>
   </mat-form-field>
-  <button type="submit" mat-raised-button color="accent" aria-label="Submit" class="w-full sm:w-auto mb-4">
+  <button type="submit" mat-raised-button color="accent" aria-label="Submit" class="w-full sm:w-auto">
     Yes, you can contact me
   </button>
-</form>
-<form *ngIf="verificationState === 1" [formGroup]="verificationFormGroup" (ngSubmit)="submitKey()">
-  <p>
-    We just texted you a verification code at <strong>{{mobileFormGroup.value.mobile | mask: '000-000-0000'}}</strong>
-    to be sure we have your correct number.
+  <p class="mt-4 text-sm">
+    Your number is only visible to volunteer group admins.
   </p>
+</form>
+
+<form *ngIf="verificationState === 1" [formGroup]="verificationFormGroup" (ngSubmit)="submitKey()">
+  <div class="mt-3 mb-5">
+    We texted your verification code to:
+    <p class="font-bold text-center my-2">
+      {{mobileFormGroup.value.mobile | mask: '000-000-0000'}}
+    </p>
+  </div>
   <mat-form-field appearance="fill" class="block">
     <mat-label>Enter code to verify phone</mat-label>
     <input type="text" matInput formControlName="key" id="key" mask="00000" required>
   </mat-form-field>
-  <button type="submit" mat-raised-button color="accent" aria-label="Submit" class=" block w-full sm:w-auto mb-4">
+  <button type="submit" mat-raised-button
+    color="accent" aria-label="Submit"
+    class=" block w-full sm:w-auto">
     Verify Phone Number
   </button>
-  <button type="button" mat-raised-button aria-label="Back" (click)="stateReset()">Back</button>
+  <div class="mt-5">
+    If you entered the wrong number:
+    <p class="text-center mt-2 mb-4">
+      <button mat-raised-button
+        (click)="stateReset()">
+        Re-enter Mobile Number
+      </button>
+    </p>
+  </div>
 </form>
-<div *ngIf="verificationState === 2" class="text-center">
-  <img src="assets/images/le-poo.svg" alt="GAC Poop" class="w-6/12 mx-auto">
-  <h1 class="text-center mt-2">Congrats [Mindy]!</h1>
-  <button mat-raised-button color="accent" [routerLink]="['/home']" class="w-full sm:w-auto mx-auto">
-    Enter Neighborhood Site
-  </button>
-</div>

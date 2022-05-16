@@ -90,10 +90,6 @@ export class MapComponent implements OnInit, OnDestroy {
     // Watch for window resize event (i.e. changing phone orienation).
     this.handleWindowResize();
 
-    // Load a map
-    // TODO - implement group id param on back end and pass it to these actions.
-    // Will be the top level group for the neighborhood.
-
     // Get all needed map data.
     merge(this.store.dispatch([new LA.GetIndex(), new RA.GetIndex()]))
       .subscribe(() => {
