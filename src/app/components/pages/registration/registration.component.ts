@@ -29,15 +29,8 @@ export class RegistrationComponent implements OnInit {
   step1FormGroup: FormGroup;
   step2FormGroup: FormGroup;
 
-  // These come from our location service.
-  // For now, hard-coded.
+  // Addresses in address field. User must live in neighborhood to join.
   addressOptions: Location[];
-  //   { id: 1, value: '123 address 1' },
-  //   { id: 2, value: '242 address 2' },
-  //   { id: 3, value: '999 address 3' },
-  //   { id: 4, value: '799 address 4' },
-  //   { id: 5, value: '663 address 5' },
-  // ];
   filteredAddressOptions$: Observable<Location[]>;
 
   constructor(
@@ -55,7 +48,7 @@ export class RegistrationComponent implements OnInit {
 
     // Get addresses.
     this.store.dispatch(new LA.GetIndexAddresses())
-      .subscribe((store) => {
+      .subscribe(() => {
         // Options from api.
         this.addressOptions = this.store.selectSnapshot(LocationState.entities<Location>())
         // Add them to the address autocomplete/select input.

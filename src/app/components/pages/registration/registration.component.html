@@ -1,96 +1,104 @@
-<header>
-  <img src="/assets/images/lppn-logo.png" class="m-auto">
-  <div class="my-2" *ngIf="currentState === 0">
-    <app-referrer-card></app-referrer-card>
-  </div>
-</header>
-<div class="my-6 mx-3 fade-in">
-  <div *ngIf="currentState === 0" [class]="{ 'fade-in': currentState === 0 }">
-    <p class="mb-6">
-      We're about making our neighborhood more friendly,
-      inclusive, beautiful, and safe for everyone here (see map below).
-    </p>
-    <p>
-      Joining lets you follow neighborhood conversations, news, and events.
-    </p>
-    <div class="text-center my-8">
-      <button mat-raised-button color="accent" (click)="join()"
-        class="join mb-4" aria-label="Join" matTooltip="Join">
-        Join the Neighborhood Group
+<div class="max-w-sm m-auto">
+  <header>
+    <img src="/assets/images/lppn-logo.png" class="m-auto">
+    <div class="my-2" *ngIf="currentState === 0">
+      <app-referrer-card></app-referrer-card>
+    </div>
+  </header>
+  <div class="my-4 fade-in">
+    <div *ngIf="currentState === 0"
+      [class]="{ 'fade-in': currentState === 0 }">
+      <div class="px-2">
+        <p class="mb-6">
+          This group is about making our neighborhood more <b>friendly,
+          inclusive, beautiful, and safe</b>.
+        </p>
+        <p>
+          Joining lets you follow neighborhood conversations, news, and events.
+        </p>
+        <div class="text-center my-6">
+          <button mat-raised-button color="accent" (click)="join()"
+            class="join" aria-label="Join" matTooltip="Join">
+            Join the Neighborhood Group
+          </button>
+        </div>
+      </div>
+
+      <div id="map" class="text-center p-4 bg-gray-200">
+        <h2 class="mb-0">Neighborhood Map</h2>
+        If you live here, you can join!
+        <br><br>
+        <img src='assets/images/lppn-map.jpg'>
+      </div>
+    </div>
+
+    <!-- Join/registration form -->
+    <div *ngIf="currentState === 1" class="-mt-4"
+      [class]="{ 'fade-in': currentState === 1 }">
+
+      <mat-stepper orientation="vertical" linear="true" #stepper>
+        <ng-template matStepperIcon="edit">
+          <mat-icon>check</mat-icon>
+        </ng-template>
+        <mat-step [stepControl]="step1FormGroup">
+          <form [formGroup]="step1FormGroup">
+            <ng-template matStepLabel>Hi, what's your name?</ng-template>
+
+            <div class="mt-3 flex justify-between">
+              <mat-form-field appearance="fill" class="two-inputs">
+                <mat-label>First</mat-label>
+                <input matInput placeholder="First name" formControlName="first" required>
+              </mat-form-field>
+
+              <mat-form-field appearance="fill" class="two-inputs">
+                <mat-label>Last</mat-label>
+                <input matInput placeholder="Last name" formControlName="last" required>
+              </mat-form-field>
+            </div>
+
+            <mat-form-field appearance="fill" class="block">
+              <mat-label>Address</mat-label>
+              <input type="text" placeholder="Enter/select your address"
+                aria-label="Address" matInput
+                appAutocompleteForceSelection formControlName="address"
+                [matAutocomplete]="autoAddress"
+                autocomplete="off"
+                required>
+              <mat-autocomplete autoActiveFirstOption #autoAddress="matAutocomplete">
+                <mat-option *ngFor="let option of filteredAddressOptions$ | async" [value]="option.address1">
+                  {{ option.address1}}
+                </mat-option>
+              </mat-autocomplete>
+              <mat-hint>You must live here to join.</mat-hint>
+            </mat-form-field>
+
+            <div class="mt-6">
+              <button mat-raised-button matStepperNext
+                [disabled]="step1FormGroup.controls.address.invalid">
+                Next
+              </button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="step2FormGroup">
+          <ng-template matStepLabel>How can we reach you?</ng-template>
+          <app-mobile-verification (verificationStateEvent)="mobileCompStateHandler($event)"></app-mobile-verification>
+
+          <button mat-raised-button
+            *ngIf="mobileCompState !== 1"
+            class="mt-6"
+            matStepperPrevious>
+            Back
+          </button>
+        </mat-step>
+      </mat-stepper>
+
+      <button mat-button color="primary"
+        *ngIf="mobileCompState !== 2"
+        (click)="join()" aria-label="Back" matTooltip="Back">
+        Back to Intro
       </button>
+
     </div>
-
-    <div id="map" class="text-center my-6">
-      <img src='assets/images/lppn-map.jpg'>
-    </div>
-  </div>
-
-  <!-- Join/registration form -->
-  <div *ngIf="currentState === 1" class="-mt-4"
-    [class]="{ 'fade-in': currentState === 1 }">
-
-    <mat-stepper orientation="vertical" linear="true" #stepper>
-      <ng-template matStepperIcon="edit">
-        <mat-icon>check</mat-icon>
-      </ng-template>
-      <mat-step [stepControl]="step1FormGroup">
-        <form [formGroup]="step1FormGroup">
-          <ng-template matStepLabel>Hi, what's your name?</ng-template>
-
-          <div class="mt-3 flex justify-between">
-            <mat-form-field appearance="fill" class="two-inputs">
-              <mat-label>First</mat-label>
-              <input matInput placeholder="First name" formControlName="first" required>
-            </mat-form-field>
-
-            <mat-form-field appearance="fill" class="two-inputs">
-              <mat-label>Last</mat-label>
-              <input matInput placeholder="Last name" formControlName="last" required>
-            </mat-form-field>
-          </div>
-
-          <mat-form-field appearance="fill" class="block">
-            <mat-label>Address</mat-label>
-            <input type="text" placeholder="Enter/select your address"
-              aria-label="Address" matInput
-              appAutocompleteForceSelection formControlName="address"
-              [matAutocomplete]="autoAddress"
-              autocomplete="off"
-              required>
-            <mat-autocomplete autoActiveFirstOption #autoAddress="matAutocomplete">
-              <mat-option *ngFor="let option of filteredAddressOptions$ | async" [value]="option.address1">
-                {{ option.address1}}
-              </mat-option>
-            </mat-autocomplete>
-            <mat-hint>You must live here to join.</mat-hint>
-          </mat-form-field>
-
-          <div class="mt-6">
-            <button mat-raised-button matStepperNext
-              [disabled]="step1FormGroup.controls.address.invalid">
-              Next
-            </button>
-          </div>
-        </form>
-      </mat-step>
-      <mat-step [stepControl]="step2FormGroup">
-        <ng-template matStepLabel>How can we reach you?</ng-template>
-        <app-mobile-verification (verificationStateEvent)="mobileCompStateHandler($event)"></app-mobile-verification>
-
-        <button mat-raised-button
-          *ngIf="mobileCompState !== 1"
-          class="mt-6"
-          matStepperPrevious>
-          Back
-        </button>
-      </mat-step>
-    </mat-stepper>
-
-    <button mat-button color="primary"
-      *ngIf="mobileCompState !== 2"
-      (click)="join()" aria-label="Back" matTooltip="Back">
-      Back to Intro
-    </button>
-
   </div>
 </div>

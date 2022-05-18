@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
  * is an optional parameter used by XHR requests to
  * let the server know that it's sending cookies or an Authorization header.
  * When using Laravel as an API, it requires this setting to accept requests
- * from client applications.
+ * from client applications for Sanctum's SPA Authentication strategy.
  *
  * This middleware saves us the trouble of adding it to every http request.
  */
@@ -22,6 +22,8 @@ export class WithCredentialsInterceptor implements HttpInterceptor {
       // Headers example.
       // headers: req.headers.set('Authorization', 'doggyAuthTokenTest')
     });
+    // Uncomment to see it.
+    // console.log('intercepted request', newReq)
     return next.handle(newReq);
   }
 }
